@@ -49,4 +49,24 @@ class JSONParserObjectTypeTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testDicationaryType() {
+        let jsonData = "{\"id\": 7}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, Int> = try parser.parseObject(jsonData, JSONKeyPath: "")
+             XCTAssertEqual(dictionary["id"], 7)
+        }catch {
+            XCTFail()
+        }
+    }
+    
+    func testDicationaryKeypath() {
+        let jsonData = "{\"keypath\": {\"id\": 7}}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, Int> = try parser.parseObject(jsonData, JSONKeyPath: "keypath")
+            XCTAssertEqual(dictionary["id"], 7)
+        }catch {
+            XCTFail()
+        }
+    }
 }

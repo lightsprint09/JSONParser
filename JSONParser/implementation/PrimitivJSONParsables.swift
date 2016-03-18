@@ -31,3 +31,9 @@ extension Bool: JSONParsable {
         self = false
     }
 }
+
+extension Dictionary: JSONParsable {
+    public init(JSON: Dictionary<String, AnyObject>) {
+        self = Dictionary<Key, Value>()
+    }
+}
