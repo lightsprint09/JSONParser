@@ -56,7 +56,7 @@ public protocol JSONFetching {
     func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
 }
 
-extension JSONFetching{
+public extension JSONFetching{
     public func loadList<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         loadList(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }

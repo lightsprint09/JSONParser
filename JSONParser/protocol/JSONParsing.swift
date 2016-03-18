@@ -56,7 +56,7 @@ public protocol JSONParsing {
     func parseObject<T: JSONParsable>(data: NSData) throws -> T
 }
 
-extension JSONParsing {
+public extension JSONParsing {
     
     public func parseObject<T: JSONParsable>(data: NSData) throws -> T {
         return try parseObject(data, JSONKeyPath: nil)

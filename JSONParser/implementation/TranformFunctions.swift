@@ -9,7 +9,7 @@
 import Foundation
 
 
-extension Dictionary where Key: StringLiteralConvertible {
+public extension Dictionary where Key: StringLiteralConvertible {
     
     public func transformToObject<T: JSONParsable>() -> T? {
         return transformToObject(keyPath: nil)
