@@ -10,6 +10,8 @@
 		941662031C96129300DEC465 /* JSONParserArrayTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */; };
 		941662051C96136800DEC465 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662041C96136800DEC465 /* TestHelpers.swift */; };
 		941662071C96AE1D00DEC465 /* PrimitivJSONParsables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */; };
+		942BF0771C9C78EB002220DA /* TranformFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BF0761C9C78EB002220DA /* TranformFunctions.swift */; };
+		942BF0791C9C7F0C002220DA /* JSONTranformExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BF0781C9C7F0C002220DA /* JSONTranformExtensionsTest.swift */; };
 		942DC54D1C92D7B700C16D15 /* JSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 942DC54C1C92D7B700C16D15 /* JSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		942DC5541C92D7B700C16D15 /* JSONParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942DC5491C92D7B700C16D15 /* JSONParser.framework */; };
 		942DC5591C92D7B700C16D15 /* JSONParserObjectTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC5581C92D7B700C16D15 /* JSONParserObjectTypeTests.swift */; };
@@ -34,6 +36,8 @@
 		941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParserArrayTypeTest.swift; sourceTree = "<group>"; };
 		941662041C96136800DEC465 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitivJSONParsables.swift; sourceTree = "<group>"; };
+		942BF0761C9C78EB002220DA /* TranformFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranformFunctions.swift; sourceTree = "<group>"; };
+		942BF0781C9C7F0C002220DA /* JSONTranformExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTranformExtensionsTest.swift; sourceTree = "<group>"; };
 		942DC5491C92D7B700C16D15 /* JSONParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DC54C1C92D7B700C16D15 /* JSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
 		942DC54E1C92D7B700C16D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				942DC5581C92D7B700C16D15 /* JSONParserObjectTypeTests.swift */,
 				941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */,
 				942DC55A1C92D7B700C16D15 /* Info.plist */,
+				942BF0781C9C7F0C002220DA /* JSONTranformExtensionsTest.swift */,
 			);
 			path = JSONParserTests;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 				942DC5631C92D7D000C16D15 /* JSONFetcher.swift */,
 				942DC56D1C92D8A600C16D15 /* JSONParser.swift */,
 				941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */,
+				942BF0761C9C78EB002220DA /* TranformFunctions.swift */,
 			);
 			path = implementation;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 				942DC5691C92D81F00C16D15 /* JSONParsing.swift in Sources */,
 				942DC56E1C92D8A600C16D15 /* JSONParser.swift in Sources */,
 				942DC5641C92D7D000C16D15 /* JSONFetcher.swift in Sources */,
+				942BF0771C9C78EB002220DA /* TranformFunctions.swift in Sources */,
 				942DC56B1C92D83000C16D15 /* JSONFetching.swift in Sources */,
 				942DC5701C92D8DF00C16D15 /* JSONParsable.swift in Sources */,
 				941662071C96AE1D00DEC465 /* PrimitivJSONParsables.swift in Sources */,
@@ -247,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BF0791C9C7F0C002220DA /* JSONTranformExtensionsTest.swift in Sources */,
 				941662031C96129300DEC465 /* JSONParserArrayTypeTest.swift in Sources */,
 				942DC5591C92D7B700C16D15 /* JSONParserObjectTypeTests.swift in Sources */,
 				941662051C96136800DEC465 /* TestHelpers.swift in Sources */,

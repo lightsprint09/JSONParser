@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public struct JSONParser: JSONParsing{
     
     public init() {}
