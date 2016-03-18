@@ -41,4 +41,29 @@ class JSONTranformExtensionsTest: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testTranformToPrimitiveType() {
+        do {
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(TestData.singleObject)
+            let obj: String? = dictionary.transformToObject(keyPath: "string")
+            XCTAssertEqual(obj, "string")
+        }catch {
+            XCTFail()
+        }
+    }
+    
+    func testTranformToListOfPrimitiveType() {
+        let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(jsonData)
+            let objs: Array<String> = dictionary.transformToList(keyPath: "innerList")!
+            XCTAssertEqual(objs.count, 2)
+            XCTAssertEqual(objs.first, "marco")
+            XCTAssertEqual(objs.last, "polo")
+        }catch {
+            XCTFail()
+        }
+    }
+    
+
 }

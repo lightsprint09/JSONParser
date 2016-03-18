@@ -16,14 +16,22 @@ public extension Dictionary where Key: StringLiteralConvertible {
     }
     
     public func transformToObject<T: JSONParsable>(keyPath keyPath: String?) -> T? {
-        guard let JSON = transformJSON(keyPath: keyPath) as Dictionary<String, AnyObject>? else { return nil }
-        return T(JSON: JSON)
+        guard let JSON = transformJSON(keyPath: keyPath) as AnyObject? else { return nil }
+        if let result = JSON as? T {
+            return result
+        }
+        guard let dictJSON = JSON as? Dictionary<String, AnyObject> else { return nil }
+        return T(JSON: dictJSON)
     }
     
     public func transformToList<T: JSONParsable>(keyPath keyPath: String) -> Array<T>? {
-        guard let JSON = transformJSON(keyPath: keyPath) as Array<Dictionary<String, AnyObject>>? else { return nil }
+        guard let JSON = transformJSON(keyPath: keyPath) as AnyObject? else { return nil }
+        if let result = JSON as? Array<T> {
+            return result
+        }
+        guard let arrayJSON = JSON as? Array<Dictionary<String, AnyObject>> else { return nil }
         
-        return JSON.map{ jsonObj in
+        return arrayJSON.map{ jsonObj in
             return T(JSON: jsonObj)
         }
     }
