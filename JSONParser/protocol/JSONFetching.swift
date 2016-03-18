@@ -10,21 +10,49 @@ import Foundation
 
 public protocol JSONFetching {
     /**
-     Fetches data from an url conatining a list of JSON objects and parses it in a array of objects conforming JSONParsable
+     Loads JSON from the given request and parses it to an array of a type conforming to `JSONParsable`.
      
-     - parameter url:         url to fetch the data from
-     - parameter JSONKeyPath: keypath to optionally query into JSON object
-     - parameter onSucess:    sucess callback
-     - parameter onError:     error callback which passes JSONFetcherErrorType
-     
-     - returns: <#return value description#>
-     */
+     - parameter request:         the request to fetch the JSON from
+     - parameter JSONKeyPath:     optional search path into JSON object for extracting result. Result must be an array 
+     - parameter onSucessHandler: the handler to execute when fetching and parsing succseed. The handler takes the following arguments:
+     `list` - The parsed list of objects of generic type T
+     - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
+     `error` - An error object that indicates why the fetching or parsing failed
+    */
     func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->())
     
-    func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
-    
+    /**
+      Loads JSON from the given request and parses it to an array of a type conforming to `JSONParsable`.
+     
+     - parameter request:         the request to fetch the JSON from
+     - parameter onSucessHandler: the handler to execute when fetching and parsing succseed. The handler takes the following arguments:
+     `list` - The parsed list of objects of generic type T
+     - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
+     `error` - An error object that indicates why the fetching or parsing failed
+     */
     func loadList<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->())
     
+    /**
+      Loads JSON from the given request and parses it to an objec conforming to `JSONParsable`.
+     
+     - parameter request:         the request to fetch the JSON from
+     - parameter JSONKeyPath:     optional search path into JSON object for extracting result. Result must be an object
+     - parameter onSucessHandler: the handler to execute when fetching and parsing succseed. The handler takes the following arguments:
+     `object` - The parsed object generic type T conforming to `JSONParsable`
+     - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
+     `error` - An error object that indicates why the fetching or parsing failed
+     */
+    func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    
+    /**
+     Loads JSON from the given request and parses it to an objec conforming to `JSONParsable`.
+     
+     - parameter request:         the request to fetch the JSON from
+     - parameter onSucessHandler: the handler to execute when fetching and parsing succseed. The handler takes the following arguments:
+     `object` - The parsed object generic type T conforming to `JSONParsable`
+     - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
+     `error` - An error object that indicates why the fetching or parsing failed
+     */
     func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
 }
 
