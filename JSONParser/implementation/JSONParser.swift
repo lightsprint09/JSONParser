@@ -10,6 +10,8 @@ import Foundation
 
 public struct JSONParser: JSONParsing{
     
+    public init() {}
+    
     public func parseList<T: JSONParsable>(data: NSData, JSONKeyPath: String? = nil) throws -> Array<T> {
         let jsonList = try parseRawObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
         
