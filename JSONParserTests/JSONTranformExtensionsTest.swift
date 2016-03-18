@@ -43,9 +43,10 @@ class JSONTranformExtensionsTest: XCTestCase {
     }
     
     func testTranformToPrimitiveType() {
+        let data = "{ \"keyPath\": {\"keyPath\": \"string\"}}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(TestData.singleObject)
-            let obj: String? = dictionary.transformToObject(keyPath: "string")
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(data)
+            let obj: String? = dictionary.transformToObject(keyPath: "keyPath.keyPath")
             XCTAssertEqual(obj, "string")
         }catch {
             XCTFail()

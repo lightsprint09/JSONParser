@@ -38,11 +38,9 @@ public extension Dictionary where Key: StringLiteralConvertible {
     //TODO: Find less hacky solution
     private func transformJSON<T>(keyPath keyPath: String?) -> T? {
         guard let dictionaryValue = self as? NSDictionary else { return nil}
-        
-        if let keyPath = keyPath, let JSON = dictionaryValue[keyPath] as? T {
+        if let keyPath = keyPath, let JSON = dictionaryValue.valueForKeyPath(keyPath) as? T {
             return JSON
         }
         return dictionaryValue as? T
     }
 }
-
