@@ -20,29 +20,23 @@ import XCTest
 class JSONParserArrayTypeTest: XCTestCase {
     let parser = JSONParser()
     
-    // {"innerList": [{"id": 1}]}
-    func testInnerList() {
-        let jsonData = "{\"innerList\": [{\"id\": 5}]}".dataUsingEncoding(NSUTF8StringEncoding)!
+    func testListKeypath() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseList(jsonData, JSONKeyPath: "innerList")
+            let objects: Array<IDTestObject> = try parser.parseList(TestData.listKeypath, JSONKeyPath: "innerList")
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
-            XCTAssertEqual(obj.id, 5)
+            XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
         }
-        
-        
     }
     
-    // [{"id": 1}]
     func testList() {
-        let jsonData = "[{\"id\": 6}]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objects: Array<IDTestObject> = try parser.parseList(jsonData, JSONKeyPath: "")
+            let objects: Array<IDTestObject> = try parser.parseList(TestData.list, JSONKeyPath: "")
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
-            XCTAssertEqual(obj.id, 6)
+            XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
         }
@@ -96,6 +90,26 @@ class JSONParserArrayTypeTest: XCTestCase {
         }catch {
             XCTFail()
         }
+    }
+    
+    func testEmptyList() {
+        let jsonData = "[]".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let objs: Array<Bool> = try parser.parseList(jsonData, JSONKeyPath: "")
+            XCTAssertEqual(objs.count, 0)
+        }catch {
+            XCTFail()
+        }
+    }
+    
+    func testInvalidData() {
+        let jsonData = "[}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let _: Array<Bool> = try parser.parseList(jsonData, JSONKeyPath: "")
+            XCTFail()
+        }catch {
+        }
+        
     }
     
 }

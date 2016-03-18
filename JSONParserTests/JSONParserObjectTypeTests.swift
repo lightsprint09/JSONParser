@@ -13,20 +13,18 @@ class JSONParserObjectTypeTests: XCTestCase {
     let parser = JSONParser()
     
     func testObject() {
-        let jsonData = "{\"id\": 3}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let obj: IDTestObject = try parser.parseObject(jsonData, JSONKeyPath: "")
-            XCTAssertEqual(obj.id, 3)
+            let obj: IDTestObject = try parser.parseObject(TestData.singleObject, JSONKeyPath: "")
+            XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
         }
     }
     
     func testKepathObject() {
-        let jsonData = "{\"keypath\": {\"id\": 7}}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let obj: IDTestObject = try parser.parseObject(jsonData, JSONKeyPath: "keypath")
-            XCTAssertEqual(obj.id, 7)
+            let obj: IDTestObject = try parser.parseObject(TestData.singleObjectKeyPath, JSONKeyPath: "keypath")
+            XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
         }
