@@ -10,18 +10,7 @@ import Foundation
 
 public struct JSONParser: JSONParsing{
     
-    func parseRawObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
-        let rootJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves)
-        if let rootDictionary = rootJSON as? NSDictionary, let JSONKeyPath = JSONKeyPath, let tagetJSON = rootDictionary.valueForKeyPath(JSONKeyPath) as? T where JSONKeyPath.characters.count > 0 {
-            return tagetJSON
-        }
-        if let tagetJSON = rootJSON as? T {
-            return tagetJSON
-        }
-        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
-    }
-    
-    public func parseList<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> Array<T> {
+    public func parseList<T: JSONParsable>(data: NSData, JSONKeyPath: String? = nil) throws -> Array<T> {
         let jsonList = try parseRawObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
         
         if let primitives = jsonList as? Array<T> {
@@ -45,6 +34,19 @@ public struct JSONParser: JSONParsing{
             return T(JSON: jsonObject)
         }
         
+        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
+    }
+    
+    //MARK: - private
+    
+    func parseRawObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
+        let rootJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves)
+        if let rootDictionary = rootJSON as? NSDictionary, let JSONKeyPath = JSONKeyPath, let tagetJSON = rootDictionary.valueForKeyPath(JSONKeyPath) as? T where JSONKeyPath.characters.count > 0 {
+            return tagetJSON
+        }
+        if let tagetJSON = rootJSON as? T {
+            return tagetJSON
+        }
         throw NSError(domain: "Worng type", code: 0, userInfo: nil)
     }
 }

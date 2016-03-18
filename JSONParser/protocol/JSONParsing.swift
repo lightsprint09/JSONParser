@@ -22,6 +22,17 @@ public protocol JSONParsing {
     func parseList<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> Array<T>
     
     /**
+     Parses NSData conatining a list of JSON types in an array of types conforming JSONParsable
+     
+     - parameter data: data wich contains JSON.
+     
+     - throws: throws if JSON parsing failed
+     
+     - returns: a list of objects parsed from JSON
+     */
+    func parseList<T: JSONParsable>(data: NSData) throws -> Array<T>
+    
+    /**
      Parses NSData conatining a JSON object in an object conforming JSONParsable
      
      - parameter data:        data wich contains JSON object.
@@ -32,4 +43,27 @@ public protocol JSONParsing {
      - returns: a object parsed from JSON
      */
     func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T
+    
+    /**
+     Parses NSData conatining a JSON object in an object conforming JSONParsable
+     
+     - parameter data: data wich contains JSON object.
+     
+     - throws: throws if JSON parsing failed
+     
+     - returns: a object parsed from JSON
+     */
+    func parseObject<T: JSONParsable>(data: NSData) throws -> T
 }
+
+extension JSONParsing {
+    
+    public func parseObject<T: JSONParsable>(data: NSData) throws -> T {
+        return try parseObject(data, JSONKeyPath: nil)
+    }
+    
+    public func parseList<T: JSONParsable>(data: NSData) throws -> Array<T> {
+        return try parseList(data, JSONKeyPath: nil)
+    }
+}
+

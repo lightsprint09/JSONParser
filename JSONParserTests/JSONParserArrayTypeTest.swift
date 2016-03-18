@@ -33,7 +33,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     func testList() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseList(TestData.list, JSONKeyPath: "")
+            let objects: Array<IDTestObject> = try parser.parseList(TestData.list)
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -46,7 +46,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testListOfString() {
         let jsonData = "[\"marco\",\"polo\"]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objs: Array<String> = try parser.parseList(jsonData,JSONKeyPath: "")
+            let objs: Array<String> = try parser.parseList(jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, "marco")
             XCTAssertEqual(objs.last, "polo")
@@ -59,7 +59,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testListOfDouble() {
         let jsonData = "[1.01, 2.02]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objs: Array<Double> = try parser.parseList(jsonData,JSONKeyPath: "")
+            let objs: Array<Double> = try parser.parseList(jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, 1.01)
             XCTAssertEqual(objs.last, 2.02)
@@ -71,7 +71,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testListOfInteger() {
         let jsonData = "[1, 2]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objs: Array<Double> = try parser.parseList(jsonData,JSONKeyPath: "")
+            let objs: Array<Double> = try parser.parseList(jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, 1)
             XCTAssertEqual(objs.last, 2)
@@ -83,7 +83,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testListOfBool() {
         let jsonData = "[true, false]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objs: Array<Bool> = try parser.parseList(jsonData, JSONKeyPath: "")
+            let objs: Array<Bool> = try parser.parseList(jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, true)
             XCTAssertEqual(objs.last, false)
@@ -95,7 +95,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testEmptyList() {
         let jsonData = "[]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let objs: Array<Bool> = try parser.parseList(jsonData, JSONKeyPath: "")
+            let objs: Array<Bool> = try parser.parseList(jsonData)
             XCTAssertEqual(objs.count, 0)
         }catch {
             XCTFail()
@@ -105,9 +105,10 @@ class JSONParserArrayTypeTest: XCTestCase {
     func testInvalidData() {
         let jsonData = "[}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let _: Array<Bool> = try parser.parseList(jsonData, JSONKeyPath: "")
+            let _: Array<Bool> = try parser.parseList(jsonData)
             XCTFail()
-        }catch {
+        }catch let error as NSError{
+            print(error)
         }
         
     }
