@@ -19,7 +19,23 @@ public protocol JSONFetching {
      
      - returns: <#return value description#>
      */
-    func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String, onSucess: (Array<T>)->(), onError: (JSONFetcherErrorType)->())
+    func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->())
     
-    func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String, onSucess: (T)->(), onError: (JSONFetcherErrorType)->())
+    func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    
+    func loadList<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    
+    func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
 }
+
+extension JSONFetching{
+    public func loadList<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+        loadList(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
+    }
+    
+    public func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+        loadObject(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
+    }
+}
+
+

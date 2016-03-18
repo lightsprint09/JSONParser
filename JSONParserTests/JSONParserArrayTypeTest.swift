@@ -108,7 +108,7 @@ class JSONParserArrayTypeTest: XCTestCase {
             let _: Array<Bool> = try parser.parseList(jsonData)
             XCTFail()
         }catch let error as NSError{
-            print(error)
+            XCTAssertNotNil(error)
         }
         
     }

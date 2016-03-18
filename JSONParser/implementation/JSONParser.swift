@@ -39,7 +39,7 @@ public struct JSONParser: JSONParsing{
     
     //MARK: - private
     
-    func parseRawObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
+    private func parseRawObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
         let rootJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves)
         if let rootDictionary = rootJSON as? NSDictionary, let JSONKeyPath = JSONKeyPath, let tagetJSON = rootDictionary.valueForKeyPath(JSONKeyPath) as? T where JSONKeyPath.characters.count > 0 {
             return tagetJSON

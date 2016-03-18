@@ -26,45 +26,54 @@ public struct JSONFetcher: JSONFetching {
         self.urlSession = urlSession
     }
     
-    public func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String = "", onSucess: (Array<T>)->(), onError: (JSONFetcherErrorType)->()) {
+    public func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         func onSuccess(data: NSData) {
             do {
                 let obj = try jsonParser.parseList(data, JSONKeyPath: JSONKeyPath) as Array<T>
-                onSucess(obj)
+                onSucessHandler(obj)
             }
             catch {
-                onError(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error") )
+                onErrorHandler(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error") )
             }
         }
         
-        loadJSONData(request, onSucess: onSuccess, onError: onError)
+        loadJSONData(request, onSucessHandler: onSuccess, onErrorHandler: onErrorHandler)
     }
     
-    public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String = "", onSucess: (T)->(), onError: (JSONFetcherErrorType)->()) {
+    public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         func onSuccess(data: NSData) {
             do {
                 let obj = try jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
-                onSucess(obj)
+                onSucessHandler(obj)
             }
             catch {
-                onError(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
+                onErrorHandler(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
             }
         }
         
-        loadJSONData(request, onSucess: onSuccess, onError: onError)
+        loadJSONData(request, onSucessHandler: onSuccess, onErrorHandler: onErrorHandler)
     }
     
     
-    private func loadJSONData(request: NSURLRequest, onSucess: (NSData)->(), onError: (JSONFetcherErrorType)->()) {
-        
+    /**
+     Loads NSData from an given request
+     
+     - parameter request:  the reuqest to recieve the data from
+     - parameter onSucessHandler: the handler to execute when the request succeeds. The handler takes the following arguments:
+                                `data` - The data returned by the request
+     
+     - parameter onErrorHandler:  the handler to execute when the request fails. The handler takes the following arguments:
+            `error` - An error object that indicates why the request failed
+     */
+    private func loadJSONData(request: NSURLRequest, onSucessHandler: (NSData)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         let task = urlSession.dataTaskWithRequest(request) {data, response, error in
             if let error = error {
-                return onError(.Network("Network error", error))
+                return onErrorHandler(.Network("Network error", error))
             }
             guard let data = data else {
-                return onError(.Network("Empty data result", error))
+                return onErrorHandler(.Network("Empty data result", error))
             }
-            onSucess(data)
+            onSucessHandler(data)
         }
         
         task.resume()
