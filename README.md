@@ -20,6 +20,10 @@ Typesave JSON parsing in Swift by using custom initializers
      let destination: String
  }
 ```
+ Import the module
+```swift
+import JSONParser
+```
  Extend the model type by implementing ```JSONParsable``` initializer
 ```swift 
  extension Train: JSONParsable {
@@ -46,3 +50,23 @@ Typesave JSON parsing in Swift by using custom initializers
     //handle error
  }
 ```
+
+##Installation
+Requires Swift 2/Xcode 7
+
+Manually (iOS 7+)
+-----------------
+1. Copy the src folder into your Xcode project. (Make sure you add the files to your target(s))
+
+Carthage
+-----------------
+Add this line to your `Cartfile`:
+```
+github "lightsprint09/JSONParser" ~> 1.0.0 # Or latest version
+```
+
+Run `carthage update`.
+```
+
+##License
+MIT
