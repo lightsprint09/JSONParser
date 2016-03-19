@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol JSONParsable {
-    init(JSON: Dictionary<String, AnyObject>)
+    init(JSON: Dictionary<String, AnyObject>) throws
 }
