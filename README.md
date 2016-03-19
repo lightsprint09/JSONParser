@@ -66,7 +66,6 @@ github "lightsprint09/JSONParser" ~> 1.0.0 # Or latest version
 ```
 
 Run `carthage update`.
-```
 
 ##License
 MIT
