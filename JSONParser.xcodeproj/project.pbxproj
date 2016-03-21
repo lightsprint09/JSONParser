@@ -118,7 +118,8 @@
 				942DC56A1C92D83000C16D15 /* JSONFetching.swift */,
 				942DC56F1C92D8DF00C16D15 /* JSONParsable.swift */,
 			);
-			path = protocol;
+			name = protocol;
+			path = src/protocol;
 			sourceTree = "<group>";
 		};
 		942DC56C1C92D87400C16D15 /* implementation */ = {
@@ -129,7 +130,8 @@
 				941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */,
 				942BF0761C9C78EB002220DA /* TranformFunctions.swift */,
 			);
-			path = implementation;
+			name = implementation;
+			path = src/implementation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -351,7 +353,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
