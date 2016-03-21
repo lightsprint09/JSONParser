@@ -21,11 +21,7 @@ public extension Dictionary where Key: StringLiteralConvertible {
             return result
         }
         guard let dictJSON = JSON as? Dictionary<String, AnyObject> else { return nil }
-        do {
-            return try T(JSON: dictJSON)
-        } catch {
-            return nil
-        }
+        return try? T(JSON: dictJSON)
         
     }
     
@@ -36,12 +32,7 @@ public extension Dictionary where Key: StringLiteralConvertible {
         }
         guard let arrayJSON = JSON as? Array<Dictionary<String, AnyObject>> else { return nil }
         
-        do {
-            return  try arrayJSON.map{ return try T(JSON: $0) }
-        } catch {
-            return nil
-        }
-        
+        return  try? arrayJSON.map{ return try T(JSON: $0) }
     }
     //TODO: Find less hacky solution
     private func transformJSON<T>(keyPath keyPath: String?) -> T? {
