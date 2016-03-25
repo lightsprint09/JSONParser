@@ -2,4 +2,5 @@ language: objective-c
 xcode_project: JSONParser.xcodeproj # path to your xcodeproj folder
 xcode_scheme: JSONParser
 osx_image: xcode7.3
-script: xctool -project JSONParser.xcodeproj -scheme JSONParser -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean test
+before_install: brew uninstall xctool && brew install --HEAD xctool
+script: xctool -project JSONParser.xcodeproj -scheme JSONParser -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
