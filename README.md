@@ -68,7 +68,7 @@ Carthage
 -----------------
 Add this line to your `Cartfile`:
 ```
-github "lightsprint09/JSONParser" ~> 1.0.0 # Or latest version
+github "lightsprint09/JSONParser" ~> 1.1.0 # Or latest version
 ```
 
 Run `carthage update`.
