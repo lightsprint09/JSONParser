@@ -10,9 +10,10 @@ Typesave JSON parsing in Swift by using custom initializers
     "type": "ICE",
     "number": 102,
     "destination": "Berlin Hbf"
-    "location": {   longitude: 9.90280151,
-                    latitude: 51.58730407
-                    }
+    "location": {   
+          "longitude": 9.90280151,
+          "latitude": 51.58730407
+       }
  }
 ```
  Your model type
@@ -37,7 +38,6 @@ import JSONParser
 ```swift 
  extension Train: JSONParsable {
      init(JSON: ThrowableDictionary<String, AnyObject>) throws {
-         //Handle missing data
          self.type = try JSON.valueFor("type")
          self.number = try JSON.valueFor("number")
          self.destination = try JSON.valueFor("destination")
