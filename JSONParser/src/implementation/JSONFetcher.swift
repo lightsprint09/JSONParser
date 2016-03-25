@@ -13,8 +13,8 @@
 import Foundation
 
 public enum JSONFetcherErrorType: ErrorType {
-    case Parse(String)
-    case Network(String, NSError?)
+    case Parse(NSError?, String)
+    case Network(NSError?, String)
 }
 
 
@@ -32,8 +32,8 @@ public struct JSONFetcher: JSONFetching {
                 let obj = try jsonParser.parseList(data, JSONKeyPath: JSONKeyPath) as Array<T>
                 onSucessHandler(obj)
             }
-            catch {
-                onErrorHandler(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error") )
+            catch let error as NSError {
+                onErrorHandler(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
             }
         }
         
@@ -46,8 +46,8 @@ public struct JSONFetcher: JSONFetching {
                 let obj = try jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
                 onSucessHandler(obj)
             }
-            catch {
-                onErrorHandler(.Parse(NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
+            catch let error as NSError{
+                onErrorHandler(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
             }
         }
         
@@ -68,10 +68,10 @@ public struct JSONFetcher: JSONFetching {
     private func loadJSONData(request: NSURLRequest, onSucessHandler: (NSData)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         let task = urlSession.dataTaskWithRequest(request) {data, response, error in
             if let error = error {
-                return onErrorHandler(.Network("Network error", error))
+                return onErrorHandler(.Network(error, "Network error"))
             }
             guard let data = data else {
-                return onErrorHandler(.Network("Empty data result", error))
+                return onErrorHandler(.Network(error, "Empty data result"))
             }
             onSucessHandler(data)
         }
