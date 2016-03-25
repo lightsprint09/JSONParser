@@ -10,6 +10,9 @@ Typesave JSON parsing in Swift by using custom initializers
     "type": "ICE",
     "number": 102,
     "destination": "Berlin Hbf"
+    "location": {   longitude: 9.90280151,
+                    latitude: 51.58730407
+                    }
  }
 ```
  Your model type
@@ -18,6 +21,12 @@ Typesave JSON parsing in Swift by using custom initializers
      let type: String
      let number: Int
      let destination: String
+     let location: Location
+ }
+ 
+ struct Location {
+     let longitude: Double
+     let latitude: Double
  }
 ```
  Import the module
@@ -27,15 +36,12 @@ import JSONParser
  Extend the model type by implementing ```JSONParsable``` initializer
 ```swift 
  extension Train: JSONParsable {
-     init(JSON: Dictionary<String, AnyObject>) throws {
+     init(JSON: ThrowableDictionary<String, AnyObject>) throws {
          //Handle missing data
-         guard let trainType = JSON["type"] as? String, let trainNumber = JSON["number"] as? Int, let trainDestination = JSON["destination"] as? String
-         else {
-            throw NSError(domain: "Domain Error", code: 0, userInfo: nil)
-         }
-         self.type = trainType
-         self.number = trainNumber
-         self.destination = trainDestination
+         self.type = try JSON.valueFor("type")
+         self.number = try JSON.valueFor("number")
+         self.destination = try JSON.valueFor("destination")
+         self.location = try JSON.transformToObject(keyPath: "location")
      }
  }
  ```
