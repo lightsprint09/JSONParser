@@ -20,6 +20,7 @@
 		942DC56B1C92D83000C16D15 /* JSONFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC56A1C92D83000C16D15 /* JSONFetching.swift */; };
 		942DC56E1C92D8A600C16D15 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC56D1C92D8A600C16D15 /* JSONParser.swift */; };
 		942DC5701C92D8DF00C16D15 /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC56F1C92D8DF00C16D15 /* JSONParsable.swift */; };
+		94959DAF1CA57655003E9EF6 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		942DC56A1C92D83000C16D15 /* JSONFetching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFetching.swift; sourceTree = "<group>"; };
 		942DC56D1C92D8A600C16D15 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		942DC56F1C92D8DF00C16D15 /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
+		94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowableDictionary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				942DC56D1C92D8A600C16D15 /* JSONParser.swift */,
 				941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */,
 				942BF0761C9C78EB002220DA /* TranformFunctions.swift */,
+				94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */,
 			);
 			name = implementation;
 			path = src/implementation;
@@ -244,6 +247,7 @@
 			files = (
 				942DC5691C92D81F00C16D15 /* JSONParsing.swift in Sources */,
 				942DC56E1C92D8A600C16D15 /* JSONParser.swift in Sources */,
+				94959DAF1CA57655003E9EF6 /* ThrowableDictionary.swift in Sources */,
 				942DC5641C92D7D000C16D15 /* JSONFetcher.swift in Sources */,
 				942BF0771C9C78EB002220DA /* TranformFunctions.swift in Sources */,
 				942DC56B1C92D83000C16D15 /* JSONFetching.swift in Sources */,

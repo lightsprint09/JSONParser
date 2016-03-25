@@ -9,7 +9,7 @@
 import Foundation
 
 
-public extension Dictionary where Key: StringLiteralConvertible {
+public extension ThrowableDictionary where Key: StringLiteralConvertible {
     
     public func transformToObject<T: JSONParsable>() -> T? {
         return transformToObject(keyPath: nil)
@@ -21,7 +21,8 @@ public extension Dictionary where Key: StringLiteralConvertible {
             return result
         }
         guard let dictJSON = JSON as? Dictionary<String, AnyObject> else { return nil }
-        return try? T(JSON: dictJSON)
+        let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictJSON)
+        return try? T(JSON: trowableDict)
         
     }
     
@@ -32,14 +33,18 @@ public extension Dictionary where Key: StringLiteralConvertible {
         }
         guard let arrayJSON = JSON as? Array<Dictionary<String, AnyObject>> else { return nil }
         
-        return  try? arrayJSON.map{ return try T(JSON: $0) }
+        return try? arrayJSON.map{ dict in
+            let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: dict)
+            return try T(JSON: trowableDict) }
     }
     //TODO: Find less hacky solution
     private func transformJSON<T>(keyPath keyPath: String?) -> T? {
-        guard let dictionaryValue = self as? NSDictionary else { return nil}
+        guard let dictionaryValue = self.dictionary as? NSDictionary else { return nil}
         if let keyPath = keyPath, let JSON = dictionaryValue.valueForKeyPath(keyPath) as? T {
             return JSON
         }
         return dictionaryValue as? T
     }
 }
+
+

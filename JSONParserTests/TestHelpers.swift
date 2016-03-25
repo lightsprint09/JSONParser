@@ -16,19 +16,16 @@ struct IDTestObject:  JSONParsable, Equatable{
     let string: String
     let bool: Bool
     
-    init(JSON: Dictionary<String, AnyObject>) throws {
-        guard let integerValue = JSON["integer"] as? Int, let doubleValue = JSON["double"] as? Double, let stringValue = JSON["string"] as? String, let boolValue = JSON["bool"] as? Bool else {
-            throw NSError(domain: "Missing value", code: 0, userInfo: nil)
-        }
-        self.integer = integerValue
-        self.double = doubleValue
-        self.string = stringValue
-        self.bool = boolValue
+    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+        self.integer = try JSON.valueFor("integer")
+        self.double = try JSON.valueFor("double")
+        self.string = try JSON.valueFor("string")
+        self.bool = try JSON.valueFor("bool")
     }
 }
 
 func ==(lhs: IDTestObject, rhs: IDTestObject) -> Bool {
-    return true
+    return lhs.integer == rhs.integer && lhs.double == rhs.double && lhs.string == rhs.string && lhs.bool == rhs.bool
 }
 
 struct TestData {
@@ -38,7 +35,7 @@ struct TestData {
     static let listKeypath = "{\"innerList\": [{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]}".dataUsingEncoding(NSUTF8StringEncoding)!
     static let list = "[{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]".dataUsingEncoding(NSUTF8StringEncoding)!
     
-    static let singleObjectResult = try! IDTestObject(JSON: ["integer": 3, "double": 0.432, "string": "string", "bool": true])
+    static let singleObjectResult = try! IDTestObject(JSON: ThrowableDictionary<String, AnyObject>(dictionary: ["integer": 3, "double": 0.432, "string": "string", "bool": true]))
 }
 
 

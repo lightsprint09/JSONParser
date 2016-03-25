@@ -21,7 +21,8 @@ public struct JSONParser: JSONParsing{
         }
         if let jsonObjects = jsonList as? Array<Dictionary<String, AnyObject>> {
             return try jsonObjects.map{ jsonObj in
-                return try T(JSON: jsonObj)
+                let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObj)
+                return try T(JSON: trowableDict)
             }
         }
         throw NSError(domain: "Worng type", code: 0, userInfo: nil)
@@ -34,7 +35,8 @@ public struct JSONParser: JSONParsing{
             return jsonPrimitive
         }
         if let jsonObject = jsonValue as? Dictionary<String, AnyObject> {
-            return try T(JSON: jsonObject)
+            let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObject)
+            return try T(JSON: trowableDict)
         }
         
         throw NSError(domain: "Worng type", code: 0, userInfo: nil)

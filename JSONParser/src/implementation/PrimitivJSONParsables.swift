@@ -9,31 +9,31 @@
 import Foundation
 
 extension String: JSONParsable {
-    public init(JSON: Dictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary<String, AnyObject>) {
         self = ""
     }
 }
 
 extension Double: JSONParsable {
-    public init(JSON: Dictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary<String, AnyObject>) {
         self = 0
     }
 }
 
 extension Int: JSONParsable {
-    public init(JSON: Dictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary<String, AnyObject>) {
         self = 0
     }
 }
 
 extension Bool: JSONParsable {
-    public init(JSON: Dictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary<String, AnyObject>) {
         self = false
     }
 }
 
 extension Dictionary: JSONParsable {
-    public init(JSON: Dictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary<String, AnyObject>) {
         self = Dictionary<Key, Value>()
     }
 }
