@@ -12,15 +12,11 @@ struct Train {
 }
 
 extension Train: JSONParsable {
-    init(JSON: Dictionary<String, AnyObject>) throws {
+    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
         //Handle missing data
-        guard let trainType = JSON["type"] as? String, let trainNumber = JSON["number"] as? Int, let trainDestination = JSON["destination"] as? String
-            else {
-                throw NSError(domain: "Domain Error", code: 0, userInfo: nil)
-        }
-        self.type = trainType
-        self.number = trainNumber
-        self.destination = trainDestination
+        self.type = try JSON.valueFor("type")
+        self.number = try JSON.valueFor("number")
+        self.destination = try JSON.valueFor("destination")
     }
 }
 
@@ -39,9 +35,9 @@ struct Location {
 }
 
 extension Location: JSONParsable {
-    init(JSON: Dictionary<String, AnyObject>) {
-        self.latitude = JSON["latitude"] as! Double
-        self.longitude = JSON["longitude"] as! Double
+    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+        self.latitude = try JSON.valueFor("latitude")
+        self.longitude = try JSON.valueFor("latitude")
     }
 }
 
@@ -53,16 +49,11 @@ struct TrainWithLocation {
 }
 
 extension TrainWithLocation: JSONParsable {
-    init(JSON: Dictionary<String, AnyObject>) throws {
-        //Handle missing data
-        guard let trainType = JSON["type"] as? String, let trainNumber = JSON["number"] as? Int, let trainDestination = JSON["destination"] as? String, let trainLocation = JSON.transformToObject(keyPath: "location") as Location?
-            else {
-                throw NSError(domain: "Domain Error", code: 0, userInfo: nil)
-        }
-        self.type = trainType
-        self.number = trainNumber
-        self.destination = trainDestination
-        self.location = trainLocation
+    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+        self.type = try JSON.valueFor("type")
+        self.number = try JSON.valueFor("number")
+        self.destination = try JSON.valueFor("destination")
+        self.location = try JSON.transformToObject(keyPath: "location")
     }
 }
 
