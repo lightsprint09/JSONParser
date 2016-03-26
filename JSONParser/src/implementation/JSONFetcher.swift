@@ -27,31 +27,35 @@ public struct JSONFetcher: JSONFetching {
     }
     
     public func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        func onSuccess(data: NSData) {
-            do {
-                let obj = try jsonParser.parseList(data, JSONKeyPath: JSONKeyPath) as Array<T>
-                onSucessHandler(obj)
+        loadJSONData(request, onSucessHandler: { data in
+            func parse() throws -> Array<T> {
+                return try self.jsonParser.parseList(data, JSONKeyPath: JSONKeyPath) as Array<T>
             }
-            catch let error as NSError {
-                onErrorHandler(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
-            }
-        }
-        
-        loadJSONData(request, onSucessHandler: onSuccess, onErrorHandler: onErrorHandler)
+            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+        }, onErrorHandler: onErrorHandler)
     }
     
     public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        func onSuccess(data: NSData) {
-            do {
-                let obj = try jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
-                onSucessHandler(obj)
+        loadJSONData(request, onSucessHandler: { data in
+            func parse() throws -> T {
+                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
             }
-            catch let error as NSError{
-                onErrorHandler(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
-            }
+            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+            }, onErrorHandler: onErrorHandler)
+    }
+    
+    func handleParsing<T>(data: NSData, parse: () throws -> T, onSucces:(T)->(), onError: (JSONFetcherErrorType)->()){
+        do {
+            let obj = try parse()
+            dispatch_async(dispatch_get_main_queue(), {
+                onSucces(obj)
+            })
         }
-        
-        loadJSONData(request, onSucessHandler: onSuccess, onErrorHandler: onErrorHandler)
+        catch let error as NSError{
+            dispatch_async(dispatch_get_main_queue(), {
+                onError(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
+            })
+        }
     }
     
     
