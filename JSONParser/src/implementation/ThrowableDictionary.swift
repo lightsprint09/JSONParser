@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ThrowableDictionary<Key: Hashable, Value> {
-    let dictionary: Dictionary<Key, Value>
+    public let dictionary: Dictionary<Key, Value>
     
     public init(dictionary: Dictionary<Key, Value>) {
         self.dictionary = dictionary
