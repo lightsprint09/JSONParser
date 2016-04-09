@@ -3,4 +3,7 @@ xcode_project: JSONParser.xcodeproj # path to your xcodeproj folder
 xcode_scheme: JSONParser
 osx_image: xcode7.3
 before_install: brew uninstall xctool && brew install --HEAD xctool
-script: xctool -project JSONParser.xcodeproj -scheme "JSONParser iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
+script: 
+- xctool -project JSONParser.xcodeproj -scheme 'JSONParser iOS' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean test
+- xctool -project JSONParser.xcodeproj -scheme 'JSONParser watchOS' -sdk watchos2.2 clean test
+- xctool -project JSONParser.xcodeproj -scheme 'JSONParser tvOS' -sdk tvos9.2 clean test

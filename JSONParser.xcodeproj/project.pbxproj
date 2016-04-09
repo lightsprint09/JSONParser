@@ -38,6 +38,7 @@
 		943D94161CB93F360074A346 /* PrimitivJSONParsables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */; };
 		943D94171CB93F360074A346 /* TranformFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BF0761C9C78EB002220DA /* TranformFunctions.swift */; };
 		943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
+		943D94191CB944750074A346 /* Info-Test-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 942DC55A1C92D7B700C16D15 /* Info-Test-iOS.plist */; };
 		94959DAF1CA57655003E9EF6 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +62,7 @@
 		942DC54C1C92D7B700C16D15 /* JSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
 		942DC5531C92D7B700C16D15 /* JSONParserTests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JSONParserTests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DC5581C92D7B700C16D15 /* JSONParserObjectTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserObjectTypeTests.swift; sourceTree = "<group>"; };
-		942DC55A1C92D7B700C16D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		942DC55A1C92D7B700C16D15 /* Info-Test-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Test-iOS.plist"; sourceTree = "<group>"; };
 		942DC5631C92D7D000C16D15 /* JSONFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFetcher.swift; sourceTree = "<group>"; };
 		942DC5681C92D81F00C16D15 /* JSONParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsing.swift; sourceTree = "<group>"; };
 		942DC56A1C92D83000C16D15 /* JSONFetching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFetching.swift; sourceTree = "<group>"; };
@@ -134,11 +135,11 @@
 				941662041C96136800DEC465 /* TestHelpers.swift */,
 				942DC5581C92D7B700C16D15 /* JSONParserObjectTypeTests.swift */,
 				941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */,
-				942DC55A1C92D7B700C16D15 /* Info.plist */,
+				942DC55A1C92D7B700C16D15 /* Info-Test-iOS.plist */,
 				942BF0781C9C7F0C002220DA /* JSONTranformExtensionsTest.swift */,
 			);
 			name = "JSONParserTests iOS";
-			path = JSONParserTests;
+			path = JSONParserTestsiOS;
 			sourceTree = "<group>";
 		};
 		942DC5671C92D7FC00C16D15 /* protocol */ = {
@@ -326,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943D94191CB944750074A346 /* Info-Test-iOS.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -478,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -528,7 +530,7 @@
 		942DC5611C92D7B700C16D15 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = JSONParserTests/Info.plist;
+				INFOPLIST_FILE = "JSONParserTestsiOS/Info-Test-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,7 +540,7 @@
 		942DC5621C92D7B700C16D15 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = JSONParserTests/Info.plist;
+				INFOPLIST_FILE = "JSONParserTestsiOS/Info-Test-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
