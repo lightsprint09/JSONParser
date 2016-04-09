@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-               BuildableName = "JSONParser_iOS.framework"
-               BlueprintName = "JSONParser_iOS"
+               BuildableName = "JSONParser iOS.framework"
+               BlueprintName = "JSONParser iOS"
                ReferencedContainer = "container:JSONParser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "942DC5521C92D7B700C16D15"
-               BuildableName = "JSONParserTests_iOS.xctest"
-               BlueprintName = "JSONParserTests_iOS"
+               BuildableName = "JSONParserTests iOS.xctest"
+               BlueprintName = "JSONParserTests iOS"
                ReferencedContainer = "container:JSONParser.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser_iOS.framework"
-            BlueprintName = "JSONParser_iOS"
+            BuildableName = "JSONParser iOS.framework"
+            BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser_iOS.framework"
-            BlueprintName = "JSONParser_iOS"
+            BuildableName = "JSONParser iOS.framework"
+            BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,8 +83,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser_iOS.framework"
-            BlueprintName = "JSONParser_iOS"
+            BuildableName = "JSONParser iOS.framework"
+            BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
