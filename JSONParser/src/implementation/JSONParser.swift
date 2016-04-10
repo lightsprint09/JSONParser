@@ -34,10 +34,10 @@ public struct JSONParser: JSONParsing{
         if let primitives = jsonList as? T {
             return primitives
         }
-        if let jsonObjects = jsonList as? Dictionary<String, AnyObject> {
+        if let jsonObjects = jsonList as? Dictionary<String, Dictionary<String, AnyObject>> {
             var result = Dictionary<String, T.Value>()
             for (_, (key, dictionary)) in jsonObjects.enumerate() {
-                let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictionary as! Dictionary<String, AnyObject>)
+                let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
                 let element = try T.Value(JSON: trowableDict)
                 result[key] = element
             }
@@ -56,8 +56,8 @@ public struct JSONParser: JSONParsing{
         }
         if let jsonObjects = jsonList as? Array<Dictionary<String, AnyObject>> {
             let result: Array<T.Element> = try jsonObjects.map{ jsonObj in
-                let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObj)
-                return try T.Element(JSON: trowableDict)
+                    let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObj)
+                    return try T.Element(JSON: trowableDict)
                 }
             return result as! T
             }
