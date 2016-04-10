@@ -32,8 +32,3 @@ extension Bool: JSONParsable {
     }
 }
 
-extension Dictionary: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
-        self = Dictionary<Key, Value>()
-    }
-}

@@ -78,4 +78,14 @@ class JSONParserObjectTypeTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testDictionaryTypeWithObject() {
+        let jsonData = "{\"object\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, IDTestObject> = try parser.parseObject(jsonData)
+            XCTAssertEqual(dictionary["object"], TestData.singleObjectResult)
+        }catch {
+            XCTFail()
+        }
+    }
 }

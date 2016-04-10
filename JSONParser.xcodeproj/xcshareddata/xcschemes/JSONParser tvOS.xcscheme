@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "94959DC21CA6C893003E9EF6"
-               BuildableName = "JSONParser tvOS.framework"
+               BuildableName = "JSONParser.framework"
                BlueprintName = "JSONParser tvOS"
                ReferencedContainer = "container:JSONParser.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94959DC21CA6C893003E9EF6"
-            BuildableName = "JSONParser tvOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser tvOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94959DC21CA6C893003E9EF6"
-            BuildableName = "JSONParser tvOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser tvOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>

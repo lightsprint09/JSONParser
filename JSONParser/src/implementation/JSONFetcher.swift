@@ -27,12 +27,12 @@ public struct JSONFetcher: JSONFetching {
     }
     
     public func loadList<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (Array<T>)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadJSONData(request, onSucessHandler: { data in
-            func parse() throws -> Array<T> {
-                return try self.jsonParser.parseList(data, JSONKeyPath: JSONKeyPath) as Array<T>
-            }
-            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
-        }, onErrorHandler: onErrorHandler)
+//        loadJSONData(request, onSucessHandler: { data in
+//            func parse() throws -> Array<T> {
+//                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as Array<T>
+//            }
+//            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+//        }, onErrorHandler: onErrorHandler)
     }
     
     public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {

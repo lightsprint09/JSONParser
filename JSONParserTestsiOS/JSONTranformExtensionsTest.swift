@@ -9,12 +9,13 @@
 import XCTest
 @testable import JSONParser
 
+
 class JSONTranformExtensionsTest: XCTestCase {
     let parser = JSONParser()
     
     func testTranformToObject() {
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(TestData.singleObject)
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObject, JSONKeyPath: nil)
             let throwableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
             let obj: IDTestObject = try throwableDict.transformToObject()
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -25,7 +26,7 @@ class JSONTranformExtensionsTest: XCTestCase {
     
     func testTranformToObjectWithKeyPath() {
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(TestData.singleObjectKeyPath)
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObjectKeyPath, JSONKeyPath: nil)
             let throwableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
             let obj: IDTestObject = try throwableDict.transformToObject(keyPath: "keypath")
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -36,7 +37,7 @@ class JSONTranformExtensionsTest: XCTestCase {
     
     func testTranformToListWithKeyPath() {
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(TestData.listKeypath)
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.listKeypath, JSONKeyPath: nil)
             let throwableDict = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
             let obj: Array<IDTestObject> = try throwableDict.transformToList(keyPath: "innerList")
             XCTAssertEqual(obj.first, TestData.singleObjectResult)
@@ -48,7 +49,7 @@ class JSONTranformExtensionsTest: XCTestCase {
     func testTranformToPrimitiveType() {
         let data = "{ \"keyPath\": {\"keyPath\": \"string\"}}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(data)
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(data, JSONKeyPath: nil)
             let throwableDict: ThrowableDictionary = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
             let obj: String = try throwableDict.transformToObject(keyPath: "keyPath.keyPath")
             XCTAssertEqual(obj, "string")
@@ -60,7 +61,7 @@ class JSONTranformExtensionsTest: XCTestCase {
     func testTranformToListOfPrimitiveType() {
         let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
-            let dictionary: Dictionary<String, AnyObject> = try parser.parseObject(jsonData)
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(jsonData, JSONKeyPath: nil)
             let throwableDict: ThrowableDictionary = ThrowableDictionary<String, AnyObject>(dictionary: dictionary)
             let objs: Array<String> = try throwableDict.transformToList(keyPath: "innerList")
             XCTAssertEqual(objs.count, 2)
