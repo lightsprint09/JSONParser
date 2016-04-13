@@ -8,16 +8,23 @@
 
 import Foundation
 
-public struct ThrowableDictionary<Key: Hashable, Value> {
-    public let dictionary: Dictionary<Key, Value>
+public struct ThrowableDictionary {
+    public let dictionary: Dictionary<String, AnyObject>
+    let parser = FoundationParser()
     
-    public init(dictionary: Dictionary<Key, Value>) {
+    public init(dictionary: Dictionary<String, AnyObject>) {
         self.dictionary = dictionary
     }
     
-    public func valueFor<T>(key: Key) throws -> T {
-        guard let value = dictionary[key] as? T else { throw NSError(domain: "Missing value for key: Key -> \(key)", code: 0, userInfo: nil) }
-        
-        return value
+    public func valueFor<T: JSONParsable>(keyPath: String? = nil) throws -> T {
+        return try parser.parse(dictionary, keyPath: keyPath)
+    }
+    
+    public func valueFor<T: _ArrayType where T.Element: JSONParsable>(keyPath: String) throws -> T {
+        return try parser.parse(dictionary, keyPath: keyPath)
+    }
+    
+    public func valueFor<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(keyPath: String) throws -> T {
+        return try parser.parse(dictionary, keyPath: keyPath)
     }
 }

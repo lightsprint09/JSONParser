@@ -16,7 +16,7 @@ struct IDTestObject:  JSONParsable, Equatable{
     let string: String
     let bool: Bool
     
-    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+    init(JSON: ThrowableDictionary) throws {
         self.integer = try JSON.valueFor("integer")
         self.double = try JSON.valueFor("double")
         self.string = try JSON.valueFor("string")
@@ -31,11 +31,12 @@ func ==(lhs: IDTestObject, rhs: IDTestObject) -> Bool {
 struct TestData {
     static let singleObject = "{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
      static let singleInvalidObject = "{\"integer\": 3, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
+    static let singleInvalidJSON = "\"integer\": 3, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
     static let singleObjectKeyPath = "{\"keypath\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".dataUsingEncoding(NSUTF8StringEncoding)!
     static let listKeypath = "{\"innerList\": [{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]}".dataUsingEncoding(NSUTF8StringEncoding)!
     static let list = "[{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]".dataUsingEncoding(NSUTF8StringEncoding)!
     
-    static let singleObjectResult = try! IDTestObject(JSON: ThrowableDictionary<String, AnyObject>(dictionary: ["integer": 3, "double": 0.432, "string": "string", "bool": true]))
+    static let singleObjectResult = try! IDTestObject(JSON: ThrowableDictionary(dictionary: ["integer": 3, "double": 0.432, "string": "string", "bool": true]))
 }
 
 

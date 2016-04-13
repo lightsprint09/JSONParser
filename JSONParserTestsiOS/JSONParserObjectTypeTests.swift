@@ -27,10 +27,20 @@ class JSONParserObjectTypeTests: XCTestCase {
             XCTFail()
         }catch let err as NSError{
             XCTAssertNotNil(err)
+            print(err)
         }
     }
     
-    func testKepathObject() {
+    func testInvalidJSON() {
+        do {
+            let _: IDTestObject = try parser.parseObject(TestData.singleInvalidJSON)
+            XCTFail()
+        }catch let err as NSError{
+            XCTAssertNotNil(err)
+        }
+    }
+    
+    func testKeyPathObject() {
         do {
             let obj: IDTestObject = try parser.parseObject(TestData.singleObjectKeyPath, JSONKeyPath: "keypath")
             XCTAssertEqual(obj, TestData.singleObjectResult)
