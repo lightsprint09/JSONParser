@@ -37,11 +37,11 @@ import JSONParser
  Extend the model type by implementing ```JSONParsable``` initializer
 ```swift 
  extension Train: JSONParsable {
-     init(JSON: ThrowableDictionary<String, AnyObject>) throws {
-         self.type = try JSON.valueFor("type")
-         self.number = try JSON.valueFor("number")
-         self.destination = try JSON.valueFor("destination")
-         self.location = try JSON.transformToObject(keyPath: "location")
+     init(JSON: ThrowableDictionary) throws {
+         type = try JSON.valueFor("type")
+         number = try JSON.valueFor("number")
+         destination = try JSON.valueFor("destination")
+         location = try JSON.valueFor(keyPath: "location")
      }
  }
  ```

@@ -10,48 +10,35 @@ import Foundation
 
 
 public struct JSONParser: JSONParsing{
+    let foundationParser = FoundationParser()
     
     public init() {}
     
-    public func parseList<T: JSONParsable>(data: NSData, JSONKeyPath: String? = nil) throws -> Array<T> {
-        let jsonList = try parseRawObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
-        
-        if let primitives = jsonList as? Array<T> {
-            return primitives
-        }
-        if let jsonObjects = jsonList as? Array<Dictionary<String, AnyObject>> {
-            return try jsonObjects.map{ jsonObj in
-                let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObj)
-                return try T(JSON: trowableDict)
-            }
-        }
-        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
+    internal func parse<TargetElement, Container>(data: NSData, JSONKeyPath: String?, parseFunction: (Container, String?) throws -> (TargetElement)) throws -> TargetElement {
+        let object = try parseFoundationObject(data) as Container
+        return try parseFunction(object, JSONKeyPath)
     }
     
-    public func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
-        let jsonValue = try parseRawObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
-        
-        if let jsonPrimitive = jsonValue as? T {
-            return jsonPrimitive
-        }
-        if let jsonObject = jsonValue as? Dictionary<String, AnyObject> {
-            let trowableDict = ThrowableDictionary<String, AnyObject>(dictionary: jsonObject)
-            return try T(JSON: trowableDict)
-        }
-        
-        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
+    public func parseObject<TargetElement: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
+        return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
+    }
+    
+    public func parseObject<TargetElement: DictionaryLiteralConvertible where TargetElement.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
+       return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
+    }
+    
+    public func parseObject<TargetElement: _ArrayType where TargetElement.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
+        return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     
     //MARK: - private
     
-    private func parseRawObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
-        let rootJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves)
-        if let rootDictionary = rootJSON as? NSDictionary, let JSONKeyPath = JSONKeyPath, let tagetJSON = rootDictionary.valueForKeyPath(JSONKeyPath) as? T where JSONKeyPath.characters.count > 0 {
-            return tagetJSON
+    internal func parseFoundationObject<Container>(data: NSData) throws -> Container {
+        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? Container else {
+             throw NSError(domain: "Wrong type", code: 0, userInfo: ["data": data, "dataString": NSString(data: data, encoding: NSUTF8StringEncoding) ?? ""])
         }
-        if let tagetJSON = rootJSON as? T {
-            return tagetJSON
-        }
-        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
+        return serializedObject
     }
+    
+    
 }

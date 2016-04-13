@@ -9,31 +9,30 @@
 import Foundation
 
 extension String: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary) {
         self = ""
+        fatalError("Should not instatiate")
     }
 }
 
 extension Double: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary) {
         self = 0
+        fatalError("Should not instatiate")
     }
 }
 
 extension Int: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary) {
         self = 0
+        fatalError("Should not instatiate")
     }
 }
 
 extension Bool: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
+    public init(JSON: ThrowableDictionary) {
         self = false
+        fatalError("Should not instatiate")
     }
 }
 
-extension Dictionary: JSONParsable {
-    public init(JSON: ThrowableDictionary<String, AnyObject>) {
-        self = Dictionary<Key, Value>()
-    }
-}

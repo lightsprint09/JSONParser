@@ -12,7 +12,7 @@ struct Train {
 }
 
 extension Train: JSONParsable {
-    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+    init(JSON: ThrowableDictionary) throws {
         //Handle missing data
         self.type = try JSON.valueFor("type")
         self.number = try JSON.valueFor("number")
@@ -35,7 +35,7 @@ struct Location {
 }
 
 extension Location: JSONParsable {
-    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+    init(JSON: ThrowableDictionary) throws {
         self.latitude = try JSON.valueFor("latitude")
         self.longitude = try JSON.valueFor("latitude")
     }
@@ -49,11 +49,11 @@ struct TrainWithLocation {
 }
 
 extension TrainWithLocation: JSONParsable {
-    init(JSON: ThrowableDictionary<String, AnyObject>) throws {
+    init(JSON: ThrowableDictionary) throws {
         self.type = try JSON.valueFor("type")
         self.number = try JSON.valueFor("number")
         self.destination = try JSON.valueFor("destination")
-        self.location = try JSON.transformToObject(keyPath: "location")
+        self.location = try JSON.valueFor("location")
     }
 }
 

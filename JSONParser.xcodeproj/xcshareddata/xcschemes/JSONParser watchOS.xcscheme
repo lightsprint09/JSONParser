@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "94959DB51CA6C86D003E9EF6"
-               BuildableName = "JSONParser watchOS.framework"
+               BuildableName = "JSONParser.framework"
                BlueprintName = "JSONParser watchOS"
                ReferencedContainer = "container:JSONParser.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94959DB51CA6C86D003E9EF6"
-            BuildableName = "JSONParser watchOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser watchOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94959DB51CA6C86D003E9EF6"
-            BuildableName = "JSONParser watchOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser watchOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>

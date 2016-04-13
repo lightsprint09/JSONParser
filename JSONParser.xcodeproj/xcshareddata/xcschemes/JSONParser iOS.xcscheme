@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-               BuildableName = "JSONParser iOS.framework"
+               BuildableName = "JSONParser.framework"
                BlueprintName = "JSONParser iOS"
                ReferencedContainer = "container:JSONParser.xcodeproj">
             </BuildableReference>
@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -43,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser iOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
@@ -65,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser iOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
@@ -83,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "942DC5481C92D7B700C16D15"
-            BuildableName = "JSONParser iOS.framework"
+            BuildableName = "JSONParser.framework"
             BlueprintName = "JSONParser iOS"
             ReferencedContainer = "container:JSONParser.xcodeproj">
          </BuildableReference>
