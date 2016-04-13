@@ -36,6 +36,15 @@
 		943D94161CB93F360074A346 /* PrimitivJSONParsables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */; };
 		943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
 		947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236E11CBE487A0032E34F /* FoundationParserTest.swift */; };
+		947236E31CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
+		947236E41CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
+		947236EC1CBE58530032E34F /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236EB1CBE58530032E34F /* JSONParserTests.swift */; };
+		947236EE1CBE58530032E34F /* JSONParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94959DC31CA6C893003E9EF6 /* JSONParser.framework */; };
+		947236F41CBE589B0032E34F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662041C96136800DEC465 /* TestHelpers.swift */; };
+		947236F51CBE589B0032E34F /* JSONParserObjectTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC5581C92D7B700C16D15 /* JSONParserObjectTypeTests.swift */; };
+		947236F61CBE589B0032E34F /* JSONParserArrayTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */; };
+		947236F71CBE589B0032E34F /* ThrowableDictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BF0781C9C7F0C002220DA /* ThrowableDictionaryTest.swift */; };
+		947236F81CBE589B0032E34F /* FoundationParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236E11CBE487A0032E34F /* FoundationParserTest.swift */; };
 		948533A61CBC2BB500529DC6 /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
 		94959DAF1CA57655003E9EF6 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +56,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 942DC5481C92D7B700C16D15;
 			remoteInfo = JSONParser;
+		};
+		947236EF1CBE58530032E34F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 942DC5401C92D7B700C16D15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94959DC21CA6C893003E9EF6;
+			remoteInfo = "JSONParser tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,6 +85,9 @@
 		943D94051CB93D220074A346 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		943D94061CB93D220074A346 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		947236E11CBE487A0032E34F /* FoundationParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationParserTest.swift; sourceTree = "<group>"; };
+		947236E91CBE58530032E34F /* JSONParserTests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JSONParserTests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		947236EB1CBE58530032E34F /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
+		947236ED1CBE58530032E34F /* Info-Test-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Test-tvOS.plist"; sourceTree = "<group>"; };
 		948533A51CBC2BB500529DC6 /* FoundationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationParser.swift; sourceTree = "<group>"; };
 		94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowableDictionary.swift; sourceTree = "<group>"; };
 		94959DB61CA6C86D003E9EF6 /* JSONParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +107,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				942DC5541C92D7B700C16D15 /* JSONParser.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947236E61CBE58530032E34F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947236EE1CBE58530032E34F /* JSONParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +140,7 @@
 			children = (
 				94959DB01CA6C822003E9EF6 /* Sources */,
 				942DC54A1C92D7B700C16D15 /* Products */,
+				947236EA1CBE58530032E34F /* JSONParserTests tvOS */,
 				942DC5571C92D7B700C16D15 /* JSONParserTests iOS */,
 			);
 			sourceTree = "<group>";
@@ -124,6 +152,7 @@
 				942DC5531C92D7B700C16D15 /* JSONParserTests iOS.xctest */,
 				94959DB61CA6C86D003E9EF6 /* JSONParser.framework */,
 				94959DC31CA6C893003E9EF6 /* JSONParser.framework */,
+				947236E91CBE58530032E34F /* JSONParserTests tvOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +193,16 @@
 			);
 			name = implementation;
 			path = ../JSONParser/src/implementation;
+			sourceTree = "<group>";
+		};
+		947236EA1CBE58530032E34F /* JSONParserTests tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				947236EB1CBE58530032E34F /* JSONParserTests.swift */,
+				947236ED1CBE58530032E34F /* Info-Test-tvOS.plist */,
+			);
+			name = "JSONParserTests tvOS";
+			path = JSONParserTests;
 			sourceTree = "<group>";
 		};
 		94959DB01CA6C822003E9EF6 /* Sources */ = {
@@ -244,6 +283,24 @@
 			productReference = 942DC5531C92D7B700C16D15 /* JSONParserTests iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		947236E81CBE58530032E34F /* JSONParserTests tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947236F11CBE58530032E34F /* Build configuration list for PBXNativeTarget "JSONParserTests tvOS" */;
+			buildPhases = (
+				947236E51CBE58530032E34F /* Sources */,
+				947236E61CBE58530032E34F /* Frameworks */,
+				947236E71CBE58530032E34F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				947236F01CBE58530032E34F /* PBXTargetDependency */,
+			);
+			name = "JSONParserTests tvOS";
+			productName = JSONParserTests;
+			productReference = 947236E91CBE58530032E34F /* JSONParserTests tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		94959DB51CA6C86D003E9EF6 /* JSONParser watchOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94959DBB1CA6C86D003E9EF6 /* Build configuration list for PBXNativeTarget "JSONParser watchOS" */;
@@ -284,7 +341,7 @@
 		942DC5401C92D7B700C16D15 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Lukas Schmidt";
 				TargetAttributes = {
@@ -293,6 +350,9 @@
 					};
 					942DC5521C92D7B700C16D15 = {
 						CreatedOnToolsVersion = 7.2.1;
+					};
+					947236E81CBE58530032E34F = {
+						CreatedOnToolsVersion = 7.3;
 					};
 					94959DB51CA6C86D003E9EF6 = {
 						CreatedOnToolsVersion = 7.3;
@@ -318,12 +378,20 @@
 				942DC5521C92D7B700C16D15 /* JSONParserTests iOS */,
 				94959DB51CA6C86D003E9EF6 /* JSONParser watchOS */,
 				94959DC21CA6C893003E9EF6 /* JSONParser tvOS */,
+				947236E81CBE58530032E34F /* JSONParserTests tvOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		942DC5511C92D7B700C16D15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947236E71CBE58530032E34F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,6 +428,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		947236E51CBE58530032E34F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947236F61CBE589B0032E34F /* JSONParserArrayTypeTest.swift in Sources */,
+				947236EC1CBE58530032E34F /* JSONParserTests.swift in Sources */,
+				947236F51CBE589B0032E34F /* JSONParserObjectTypeTests.swift in Sources */,
+				947236F71CBE589B0032E34F /* ThrowableDictionaryTest.swift in Sources */,
+				947236F41CBE589B0032E34F /* TestHelpers.swift in Sources */,
+				947236F81CBE589B0032E34F /* FoundationParserTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94959DB11CA6C86D003E9EF6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,6 +450,7 @@
 				943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940A1CB93F300074A346 /* JSONFetching.swift in Sources */,
 				943D940B1CB93F300074A346 /* JSONParsable.swift in Sources */,
+				947236E31CBE58170032E34F /* FoundationParser.swift in Sources */,
 				943D94141CB93F360074A346 /* JSONFetcher.swift in Sources */,
 				943D94161CB93F360074A346 /* PrimitivJSONParsables.swift in Sources */,
 			);
@@ -383,6 +465,7 @@
 				943D94131CB93F350074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940D1CB93F310074A346 /* JSONFetching.swift in Sources */,
 				943D940E1CB93F310074A346 /* JSONParsable.swift in Sources */,
+				947236E41CBE58170032E34F /* FoundationParser.swift in Sources */,
 				943D940F1CB93F350074A346 /* JSONFetcher.swift in Sources */,
 				943D94111CB93F350074A346 /* PrimitivJSONParsables.swift in Sources */,
 			);
@@ -395,6 +478,11 @@
 			isa = PBXTargetDependency;
 			target = 942DC5481C92D7B700C16D15 /* JSONParser iOS */;
 			targetProxy = 942DC5551C92D7B700C16D15 /* PBXContainerItemProxy */;
+		};
+		947236F01CBE58530032E34F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94959DC21CA6C893003E9EF6 /* JSONParser tvOS */;
+			targetProxy = 947236EF1CBE58530032E34F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -545,6 +633,32 @@
 			};
 			name = Release;
 		};
+		947236F21CBE58530032E34F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "JSONParserTests/Info-Test-tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		947236F31CBE58530032E34F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = "JSONParserTests/Info-Test-tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
 		94959DBC1CA6C86D003E9EF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -656,6 +770,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		947236F11CBE58530032E34F /* Build configuration list for PBXNativeTarget "JSONParserTests tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947236F21CBE58530032E34F /* Debug */,
+				947236F31CBE58530032E34F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		94959DBB1CA6C86D003E9EF6 /* Build configuration list for PBXNativeTarget "JSONParser watchOS" */ = {
 			isa = XCConfigurationList;

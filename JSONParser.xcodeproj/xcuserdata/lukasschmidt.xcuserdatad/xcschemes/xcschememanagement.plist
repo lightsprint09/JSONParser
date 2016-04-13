@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>JSONParserTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>942DC5521C92D7B700C16D15</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>947236E81CBE58530032E34F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
