@@ -16,9 +16,7 @@ public struct JSONParser: JSONParsing{
     
     internal func parse<TargetElement, Container>(data: NSData, JSONKeyPath: String?, parseFunction: (Container, String?) throws -> (TargetElement)) throws -> TargetElement {
         let object = try parseFoundationObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
-        if let primitive = object as? TargetElement {
-            return primitive
-        }
+
         if let object = object as? Container {
             return try parseFunction(object, JSONKeyPath)
         }

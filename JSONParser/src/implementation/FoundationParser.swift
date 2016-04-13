@@ -10,6 +10,8 @@ import Foundation
 
 struct FoundationParser {
     
+    init() {}
+    
     func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, AnyObject>) throws -> Result {
             let trowableDict = ThrowableDictionary(dictionary: typedContainer)
@@ -44,7 +46,7 @@ struct FoundationParser {
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    internal func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
+    func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
         if let rootDictionary = data as? NSDictionary, let keyPath = keyPath where !keyPath.isEmpty {
             if let targetData = rootDictionary.valueForKeyPath(keyPath) {
                 if let t = targetData as? T {
