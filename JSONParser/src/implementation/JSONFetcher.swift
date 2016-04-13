@@ -7,9 +7,6 @@
 //
 
 
-//loadArray -> {t: []}, [{}, {}]
-//?? -> [[], []]
-
 import Foundation
 
 public enum JSONFetcherErrorType: ErrorType {
@@ -27,30 +24,30 @@ public struct JSONFetcher: JSONFetching {
     }
     
     public func loadObject<T : _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T) -> (), onErrorHandler: (JSONFetcherErrorType) -> ()) {
-                loadJSONData(request, onSucessHandler: { data in
-                    func parse() throws -> T {
-                        return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
-                    }
-                    self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
-                }, onErrorHandler: onErrorHandler)
+            loadJSONData(request, onSucessHandler: { data in
+                func parse() throws -> T {
+                    return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
+                }
+                self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+            }, onErrorHandler: onErrorHandler)
     }
     
     public func loadObject<T : DictionaryLiteralConvertible where T.Value : JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T) -> (), onErrorHandler: (JSONFetcherErrorType) -> ()) {
         loadJSONData(request, onSucessHandler: { data in
             func parse() throws -> T {
-                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
+                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
             }
             self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
-            }, onErrorHandler: onErrorHandler)
+        }, onErrorHandler: onErrorHandler)
     }
     
     public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         loadJSONData(request, onSucessHandler: { data in
             func parse() throws -> T {
-                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath) as T
+                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
             }
             self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
-            }, onErrorHandler: onErrorHandler)
+        }, onErrorHandler: onErrorHandler)
     }
     
     private func handleParsing<Result: Any>(data: NSData, parse: () throws -> Result, onSucces:(Result)->(), onError: (JSONFetcherErrorType)->()){
