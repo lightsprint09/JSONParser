@@ -38,10 +38,10 @@ import JSONParser
 ```swift 
  extension Train: JSONParsable {
      init(JSON: ThrowableDictionary) throws {
-         self.type = try JSON.valueFor("type")
-         self.number = try JSON.valueFor("number")
-         self.destination = try JSON.valueFor("destination")
-         self.location = try JSON.valueFor(keyPath: "location")
+         type = try JSON.valueFor("type")
+         number = try JSON.valueFor("number")
+         destination = try JSON.valueFor("destination")
+         location = try JSON.valueFor(keyPath: "location")
      }
  }
  ```
