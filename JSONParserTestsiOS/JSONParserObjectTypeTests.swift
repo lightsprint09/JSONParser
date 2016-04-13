@@ -27,7 +27,7 @@ class JSONParserObjectTypeTests: XCTestCase {
             XCTFail()
         }catch let err as NSError{
             XCTAssertNotNil(err)
-            print(err)
+            XCTAssertEqual(err.domain, "Wrong key: double")
         }
     }
     

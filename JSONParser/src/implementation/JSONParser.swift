@@ -15,31 +15,29 @@ public struct JSONParser: JSONParsing{
     public init() {}
     
     internal func parse<TargetElement, Container>(data: NSData, JSONKeyPath: String?, parseFunction: (Container, String?) throws -> (TargetElement)) throws -> TargetElement {
-        let object = try parseFoundationObject(data, JSONKeyPath: JSONKeyPath) as AnyObject
-
-        if let object = object as? Container {
-            return try parseFunction(object, JSONKeyPath)
-        }
-        
-        throw NSError(domain: "Worng type", code: 0, userInfo: nil)
+        let object = try parseFoundationObject(data) as Container
+        return try parseFunction(object, JSONKeyPath)
     }
     
-    public func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
+    public func parseObject<TargetElement: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
         return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     
-    public func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
+    public func parseObject<TargetElement: DictionaryLiteralConvertible where TargetElement.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
        return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     
-    public func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
+    public func parseObject<TargetElement: _ArrayType where TargetElement.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
         return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     
     //MARK: - private
     
-    internal func parseFoundationObject<T>(data: NSData, JSONKeyPath: String?) throws -> T {
-        return try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as! T
+    internal func parseFoundationObject<Container>(data: NSData) throws -> Container {
+        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? Container else {
+             throw NSError(domain: "Wrong type", code: 0, userInfo: ["data": data, "dataString": NSString(data: data, encoding: NSUTF8StringEncoding) ?? ""])
+        }
+        return serializedObject
     }
     
     

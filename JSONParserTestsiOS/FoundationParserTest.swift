@@ -18,7 +18,6 @@ class FoundationParserTest: XCTestCase {
             XCTFail()
         }catch let err as NSError{
             XCTAssertNotNil(err)
-            print(err)
         }
     }
 }
