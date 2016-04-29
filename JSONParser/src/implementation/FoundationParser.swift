@@ -48,7 +48,7 @@ struct FoundationParser {
     
     func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
         if let rootDictionary = data as? NSDictionary, let keyPath = keyPath where !keyPath.isEmpty {
-            if let targetData = rootDictionary.valueForKeyPath(keyPath), let typedTargetData = targetData as? T{
+            if let typedTargetData = rootDictionary.valueForKeyPath(keyPath) as? T {
                 return typedTargetData
             }else {
                 throw NSError(domain: "Wrong key: \(keyPath)", code: 0, userInfo: ["object": data])
