@@ -27,4 +27,12 @@ public struct ThrowableDictionary {
     public func valueFor<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(keyPath: String) throws -> T {
         return try parser.parse(dictionary, keyPath: keyPath)
     }
+    
+    public func valueFor(keyPath: String) throws -> Dictionary<String, AnyObject> {
+        return try parser.parseFoundationObject(dictionary, keyPath: keyPath)
+    }
+    
+    public func valueFor(keyPath: String) throws -> Array<AnyObject> {
+        return try parser.parseFoundationObject(dictionary, keyPath: keyPath)
+    }
 }
