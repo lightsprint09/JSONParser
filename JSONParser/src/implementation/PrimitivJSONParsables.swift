@@ -29,6 +29,13 @@ extension Int: JSONParsable {
     }
 }
 
+extension Float: JSONParsable {
+    public init(JSON: ThrowableDictionary) {
+        self = 0
+        fatalError("Should not instatiate")
+    }
+}
+
 extension Bool: JSONParsable {
     public init(JSON: ThrowableDictionary) {
         self = false
