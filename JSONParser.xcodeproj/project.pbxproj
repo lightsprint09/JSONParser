@@ -44,6 +44,7 @@
 		9449AC2B1CD4DBBF00D16D0E /* JSONParsingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */; };
 		9449AC2C1CD4DBC000D16D0E /* JSONParsingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */; };
 		9449AC2E1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */; };
+		9449AC301CD4E8E500D16D0E /* JSONFetchingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */; };
 		947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236E11CBE487A0032E34F /* FoundationParserTest.swift */; };
 		947236E31CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
 		947236E41CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
@@ -97,6 +98,7 @@
 		943D94051CB93D220074A346 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		943D94061CB93D220074A346 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParserInjectionTest.swift; sourceTree = "<group>"; };
+		9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFetchingConvenience.swift; sourceTree = "<group>"; };
 		947236E11CBE487A0032E34F /* FoundationParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationParserTest.swift; sourceTree = "<group>"; };
 		947236E91CBE58530032E34F /* JSONParserTests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JSONParserTests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		947236EB1CBE58530032E34F /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
@@ -189,8 +191,9 @@
 		942DC5671C92D7FC00C16D15 /* protocol */ = {
 			isa = PBXGroup;
 			children = (
-				942DC5681C92D81F00C16D15 /* JSONParsing.swift */,
 				942DC56A1C92D83000C16D15 /* JSONFetching.swift */,
+				9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */,
+				942DC5681C92D81F00C16D15 /* JSONParsing.swift */,
 				942DC56F1C92D8DF00C16D15 /* JSONParsable.swift */,
 				940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */,
 			);
@@ -425,6 +428,7 @@
 				942DC5691C92D81F00C16D15 /* JSONParsing.swift in Sources */,
 				942DC56E1C92D8A600C16D15 /* JSONParser.swift in Sources */,
 				940CF2D31CD4B8A900E26440 /* NoContext.swift in Sources */,
+				9449AC301CD4E8E500D16D0E /* JSONFetchingConvenience.swift in Sources */,
 				94959DAF1CA57655003E9EF6 /* ThrowableDictionary.swift in Sources */,
 				942DC5641C92D7D000C16D15 /* JSONFetcher.swift in Sources */,
 				942DC56B1C92D83000C16D15 /* JSONFetching.swift in Sources */,
