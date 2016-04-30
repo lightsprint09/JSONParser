@@ -16,7 +16,7 @@ struct IDTestObject:  JSONParsable, Equatable{
     let string: String
     let bool: Bool
     
-    init(JSON: ThrowableDictionary) throws {
+    init(JSON: ThrowableDictionary<NoContext>) throws {
         self.integer = try JSON.valueFor("integer")
         self.double = try JSON.valueFor("double")
         self.string = try JSON.valueFor("string")

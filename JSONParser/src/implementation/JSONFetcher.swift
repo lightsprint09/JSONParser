@@ -26,7 +26,7 @@ public struct JSONFetcher: JSONFetching {
     public func loadObject<T : _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T) -> (), onErrorHandler: (JSONFetcherErrorType) -> ()) {
             loadJSONData(request, onSucessHandler: { data in
                 func parse() throws -> T {
-                    return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
+                    return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
                 }
                 self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
             }, onErrorHandler: onErrorHandler)
@@ -35,7 +35,7 @@ public struct JSONFetcher: JSONFetching {
     public func loadObject<T : DictionaryLiteralConvertible where T.Value : JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T) -> (), onErrorHandler: (JSONFetcherErrorType) -> ()) {
         loadJSONData(request, onSucessHandler: { data in
             func parse() throws -> T {
-                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
+                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
             }
             self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
         }, onErrorHandler: onErrorHandler)
@@ -44,7 +44,7 @@ public struct JSONFetcher: JSONFetching {
     public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
         loadJSONData(request, onSucessHandler: { data in
             func parse() throws -> T {
-                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
+                return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
             }
             self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
         }, onErrorHandler: onErrorHandler)

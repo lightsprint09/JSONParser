@@ -12,19 +12,19 @@ struct FoundationParser {
     
     init() {}
     
-    func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
+    func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?, context: Result.Context?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, AnyObject>) throws -> Result {
-            let trowableDict = ThrowableDictionary(dictionary: typedContainer)
+            let trowableDict = ThrowableDictionary<Result.Context>(dictionary: typedContainer, context: context)
             return try Result(JSON: trowableDict)
         }
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    func parse<Result: DictionaryLiteralConvertible where Result.Value: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
+    func parse<Result: DictionaryLiteralConvertible where Result.Value: JSONParsable>(container: AnyObject, keyPath: String?, context: Result.Value.Context?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, Dictionary<String, AnyObject>>) throws -> Result {
             var result = Dictionary<String, Result.Value>()
             for (_, (key, dictionary)) in typedContainer.enumerate() {
-                let trowableDict = ThrowableDictionary(dictionary: dictionary)
+                let trowableDict = ThrowableDictionary<Result.Value.Context>(dictionary: dictionary, context: context)
                 let element = try Result.Value(JSON: trowableDict)
                 result[key] = element
             }
@@ -34,13 +34,13 @@ struct FoundationParser {
        return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    func parse<T: _ArrayType where T.Element: JSONParsable>(container: AnyObject, keyPath: String?) throws -> T {
-        func parseIt(typedContainer: Array<Dictionary<String, AnyObject>>) throws -> T {
-            let result: Array<T.Element> = try typedContainer.map{ jsonObj in
-                let trowableDict = ThrowableDictionary(dictionary: jsonObj)
-                return try T.Element(JSON: trowableDict)
+    func parse<Result: _ArrayType where Result.Element: JSONParsable>(container: AnyObject, keyPath: String?, context: Result.Element.Context?) throws -> Result {
+        func parseIt(typedContainer: Array<Dictionary<String, AnyObject>>) throws -> Result {
+            let result: Array<Result.Element> = try typedContainer.map{ jsonObj in
+                let trowableDict = ThrowableDictionary<Result.Element.Context>(dictionary: jsonObj, context: context)
+                return try Result.Element(JSON: trowableDict)
             }
-            return result as! T
+            return result as! Result
         }
         
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)

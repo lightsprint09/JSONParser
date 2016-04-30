@@ -9,5 +9,6 @@
 import Foundation
 
 public protocol JSONParsable {
-    init(JSON: ThrowableDictionary) throws
+    associatedtype Context
+    init(JSON: ThrowableDictionary<Context>) throws
 }

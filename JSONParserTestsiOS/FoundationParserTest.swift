@@ -14,7 +14,7 @@ class FoundationParserTest: XCTestCase {
     
     func testWrongContainerType() {
         do {
-            let _: IDTestObject = try parser.parse(NSDate(), keyPath: nil)
+            let _: IDTestObject = try parser.parse(NSDate(), keyPath: nil, context: nil)
             XCTFail()
         }catch let err as NSError{
             XCTAssertNotNil(err)

@@ -27,7 +27,7 @@ struct Struct {
 }
 
 extension Struct: JSONParsable {
-    init(JSON: ThrowableDictionary) throws  {
+    init(JSON: ThrowableDictionary<NoContext>) throws  {
         string = try JSON.valueFor("string")
         int = try JSON.valueFor("int")
         double = try JSON.valueFor("double")
@@ -60,7 +60,7 @@ class PerformanceTest: XCTestCase {
         let dictionary = object as! Dictionary<String, AnyObject>
         measureBlock {
             for _ in 0..<100 {
-                let dict = ThrowableDictionary(dictionary: dictionary)
+                let dict = ThrowableDictionary<NoContext>(dictionary: dictionary)
                 let _: Struct = try! dict.valueFor()
             }
         }
@@ -70,7 +70,7 @@ class PerformanceTest: XCTestCase {
         let dictionary = object as! Dictionary<String, AnyObject>
         measureBlock {
             for _ in 0..<1000 {
-                let dict = ThrowableDictionary(dictionary: dictionary)
+                let dict = ThrowableDictionary<NoContext>(dictionary: dictionary)
                 let _: Struct = try! dict.valueFor()
             }
         }
@@ -80,7 +80,7 @@ class PerformanceTest: XCTestCase {
         let dictionary = object as! Dictionary<String, AnyObject>
         measureBlock {
             for _ in 0..<10000 {
-                let dict = ThrowableDictionary(dictionary: dictionary)
+                let dict = ThrowableDictionary<NoContext>(dictionary: dictionary)
                 let _: Struct = try! dict.valueFor()
             }
         }

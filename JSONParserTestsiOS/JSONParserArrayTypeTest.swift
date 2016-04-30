@@ -22,7 +22,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     func testListKeypath() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseObject(TestData.listKeypath, JSONKeyPath: "innerList")
+            let objects: Array<IDTestObject> = try parser.parseObject(TestData.listKeypath, JSONKeyPath: "innerList", context: nil)
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -33,7 +33,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     func testList() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseObject(TestData.list, JSONKeyPath: nil)
+            let objects: Array<IDTestObject> = try parser.parseObject(TestData.list)
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
             XCTAssertEqual(obj, TestData.singleObjectResult)
