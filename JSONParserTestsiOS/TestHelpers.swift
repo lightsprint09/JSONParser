@@ -24,6 +24,14 @@ struct IDTestObject:  JSONParsable, Equatable{
     }
 }
 
+struct IDTestInjectObject: JSONParsable{
+    let context: String?
+    
+    init(JSON: ThrowableDictionary<String>) throws {
+        self.context = JSON.context
+    }
+}
+
 func ==(lhs: IDTestObject, rhs: IDTestObject) -> Bool {
     return lhs.integer == rhs.integer && lhs.double == rhs.double && lhs.string == rhs.string && lhs.bool == rhs.bool
 }

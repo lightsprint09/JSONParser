@@ -42,7 +42,6 @@ class JSONParserArrayTypeTest: XCTestCase {
         }
     }
     
-    // ["marco", "polo"]
     func testListOfString() {
         let jsonData = "[\"marco\",\"polo\"]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
@@ -55,7 +54,6 @@ class JSONParserArrayTypeTest: XCTestCase {
         }
     }
     
-    // [1, 2]
     func testListOfDouble() {
         let jsonData = "[1.01, 2.02]".dataUsingEncoding(NSUTF8StringEncoding)!
         do {

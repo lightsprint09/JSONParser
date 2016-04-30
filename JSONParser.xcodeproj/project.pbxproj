@@ -39,6 +39,11 @@
 		943D94151CB93F360074A346 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DC56D1C92D8A600C16D15 /* JSONParser.swift */; };
 		943D94161CB93F360074A346 /* PrimitivJSONParsables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */; };
 		943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94959DAE1CA57655003E9EF6 /* ThrowableDictionary.swift */; };
+		9449AC291CD4DBA100D16D0E /* NoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D21CD4B8A900E26440 /* NoContext.swift */; };
+		9449AC2A1CD4DBA200D16D0E /* NoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D21CD4B8A900E26440 /* NoContext.swift */; };
+		9449AC2B1CD4DBBF00D16D0E /* JSONParsingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */; };
+		9449AC2C1CD4DBC000D16D0E /* JSONParsingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */; };
+		9449AC2E1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */; };
 		947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236E11CBE487A0032E34F /* FoundationParserTest.swift */; };
 		947236E31CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
 		947236E41CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
@@ -91,6 +96,7 @@
 		943D94041CB93D0D0074A346 /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		943D94051CB93D220074A346 /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		943D94061CB93D220074A346 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParserInjectionTest.swift; sourceTree = "<group>"; };
 		947236E11CBE487A0032E34F /* FoundationParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationParserTest.swift; sourceTree = "<group>"; };
 		947236E91CBE58530032E34F /* JSONParserTests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JSONParserTests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		947236EB1CBE58530032E34F /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 				942BF0781C9C7F0C002220DA /* ThrowableDictionaryTest.swift */,
 				947236E11CBE487A0032E34F /* FoundationParserTest.swift */,
 				940CF2CB1CD40F5E00E26440 /* PerformanceTest.swift */,
+				9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */,
 			);
 			name = "JSONParserTests iOS";
 			path = JSONParserTestsiOS;
@@ -432,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9449AC2E1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift in Sources */,
 				940CF2CC1CD40F5E00E26440 /* PerformanceTest.swift in Sources */,
 				947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */,
 				942BF0791C9C7F0C002220DA /* ThrowableDictionaryTest.swift in Sources */,
@@ -459,10 +467,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9449AC2C1CD4DBC000D16D0E /* JSONParsingConvenience.swift in Sources */,
 				943D94091CB93F300074A346 /* JSONParsing.swift in Sources */,
 				943D94151CB93F360074A346 /* JSONParser.swift in Sources */,
 				943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940A1CB93F300074A346 /* JSONFetching.swift in Sources */,
+				9449AC2A1CD4DBA200D16D0E /* NoContext.swift in Sources */,
 				943D940B1CB93F300074A346 /* JSONParsable.swift in Sources */,
 				947236E31CBE58170032E34F /* FoundationParser.swift in Sources */,
 				943D94141CB93F360074A346 /* JSONFetcher.swift in Sources */,
@@ -474,10 +484,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9449AC2B1CD4DBBF00D16D0E /* JSONParsingConvenience.swift in Sources */,
 				943D940C1CB93F310074A346 /* JSONParsing.swift in Sources */,
 				943D94101CB93F350074A346 /* JSONParser.swift in Sources */,
 				943D94131CB93F350074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940D1CB93F310074A346 /* JSONFetching.swift in Sources */,
+				9449AC291CD4DBA100D16D0E /* NoContext.swift in Sources */,
 				943D940E1CB93F310074A346 /* JSONParsable.swift in Sources */,
 				947236E41CBE58170032E34F /* FoundationParser.swift in Sources */,
 				943D940F1CB93F350074A346 /* JSONFetcher.swift in Sources */,
