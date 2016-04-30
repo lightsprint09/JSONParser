@@ -28,7 +28,7 @@ public struct JSONFetcher: JSONFetching {
                 func parse() throws -> T {
                     return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
                 }
-                self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+                self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
             }, onErrorHandler: onErrorHandler)
     }
     
@@ -37,7 +37,7 @@ public struct JSONFetcher: JSONFetching {
             func parse() throws -> T {
                 return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
             }
-            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+            self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
         }, onErrorHandler: onErrorHandler)
     }
     
@@ -46,11 +46,11 @@ public struct JSONFetcher: JSONFetching {
             func parse() throws -> T {
                 return try self.jsonParser.parseObject(data, JSONKeyPath: JSONKeyPath)
             }
-            self.handleParsing(data, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
+            self.handleParsing(request.URL, parse: parse, onSucces: onSucessHandler, onError: onErrorHandler)
         }, onErrorHandler: onErrorHandler)
     }
     
-    private func handleParsing<Result: Any>(data: NSData, parse: () throws -> Result, onSucces:(Result)->(), onError: (JSONFetcherErrorType)->()){
+    private func handleParsing<Result: Any>(url: NSURL?, parse: () throws -> Result, onSucces:(Result)->(), onError: (JSONFetcherErrorType)->()){
         do {
             let obj = try parse()
             dispatch_async(dispatch_get_main_queue(), {
@@ -59,7 +59,7 @@ public struct JSONFetcher: JSONFetching {
         }
         catch let error as NSError{
             dispatch_async(dispatch_get_main_queue(), {
-                onError(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
+                onError(.Parse(error, url?.absoluteString ?? "Error"))
             })
         }
     }

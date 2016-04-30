@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940CF2CC1CD40F5E00E26440 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2CB1CD40F5E00E26440 /* PerformanceTest.swift */; };
+		940CF2CD1CD40F5E00E26440 /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2CB1CD40F5E00E26440 /* PerformanceTest.swift */; };
 		941662031C96129300DEC465 /* JSONParserArrayTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */; };
 		941662051C96136800DEC465 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662041C96136800DEC465 /* TestHelpers.swift */; };
 		941662071C96AE1D00DEC465 /* PrimitivJSONParsables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */; };
@@ -67,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		940CF2CB1CD40F5E00E26440 /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 		941662021C96129300DEC465 /* JSONParserArrayTypeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParserArrayTypeTest.swift; sourceTree = "<group>"; };
 		941662041C96136800DEC465 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		941662061C96AE1D00DEC465 /* PrimitivJSONParsables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimitivJSONParsables.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 				942DC55A1C92D7B700C16D15 /* Info-Test-iOS.plist */,
 				942BF0781C9C7F0C002220DA /* ThrowableDictionaryTest.swift */,
 				947236E11CBE487A0032E34F /* FoundationParserTest.swift */,
+				940CF2CB1CD40F5E00E26440 /* PerformanceTest.swift */,
 			);
 			name = "JSONParserTests iOS";
 			path = JSONParserTestsiOS;
@@ -420,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940CF2CC1CD40F5E00E26440 /* PerformanceTest.swift in Sources */,
 				947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */,
 				942BF0791C9C7F0C002220DA /* ThrowableDictionaryTest.swift in Sources */,
 				941662031C96129300DEC465 /* JSONParserArrayTypeTest.swift in Sources */,
@@ -437,6 +442,7 @@
 				947236F51CBE589B0032E34F /* JSONParserObjectTypeTests.swift in Sources */,
 				947236F71CBE589B0032E34F /* ThrowableDictionaryTest.swift in Sources */,
 				947236F41CBE589B0032E34F /* TestHelpers.swift in Sources */,
+				940CF2CD1CD40F5E00E26440 /* PerformanceTest.swift in Sources */,
 				947236F81CBE589B0032E34F /* FoundationParserTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,6 +590,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Sources/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -591,7 +598,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParser;
 				PRODUCT_NAME = JSONParser;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Debug;
 		};
@@ -603,7 +610,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "Sources/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -611,6 +618,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.JSONParser;
 				PRODUCT_NAME = JSONParser;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
