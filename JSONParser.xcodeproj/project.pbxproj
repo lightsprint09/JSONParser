@@ -45,6 +45,8 @@
 		9449AC2C1CD4DBC000D16D0E /* JSONParsingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940CF2D01CD4B2E800E26440 /* JSONParsingConvenience.swift */; };
 		9449AC2E1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2D1CD4E0CD00D16D0E /* JSONParserInjectionTest.swift */; };
 		9449AC301CD4E8E500D16D0E /* JSONFetchingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */; };
+		9449AC311CD504F700D16D0E /* JSONFetchingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */; };
+		9449AC321CD504F700D16D0E /* JSONFetchingConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449AC2F1CD4E8E500D16D0E /* JSONFetchingConvenience.swift */; };
 		947236E21CBE487A0032E34F /* FoundationParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947236E11CBE487A0032E34F /* FoundationParserTest.swift */; };
 		947236E31CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
 		947236E41CBE58170032E34F /* FoundationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948533A51CBC2BB500529DC6 /* FoundationParser.swift */; };
@@ -474,6 +476,7 @@
 				9449AC2C1CD4DBC000D16D0E /* JSONParsingConvenience.swift in Sources */,
 				943D94091CB93F300074A346 /* JSONParsing.swift in Sources */,
 				943D94151CB93F360074A346 /* JSONParser.swift in Sources */,
+				9449AC321CD504F700D16D0E /* JSONFetchingConvenience.swift in Sources */,
 				943D94181CB93F360074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940A1CB93F300074A346 /* JSONFetching.swift in Sources */,
 				9449AC2A1CD4DBA200D16D0E /* NoContext.swift in Sources */,
@@ -491,6 +494,7 @@
 				9449AC2B1CD4DBBF00D16D0E /* JSONParsingConvenience.swift in Sources */,
 				943D940C1CB93F310074A346 /* JSONParsing.swift in Sources */,
 				943D94101CB93F350074A346 /* JSONParser.swift in Sources */,
+				9449AC311CD504F700D16D0E /* JSONFetchingConvenience.swift in Sources */,
 				943D94131CB93F350074A346 /* ThrowableDictionary.swift in Sources */,
 				943D940D1CB93F310074A346 /* JSONFetching.swift in Sources */,
 				9449AC291CD4DBA100D16D0E /* NoContext.swift in Sources */,
