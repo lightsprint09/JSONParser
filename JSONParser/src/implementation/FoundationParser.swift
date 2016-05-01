@@ -61,7 +61,7 @@ struct FoundationParser {
         throw NSError(domain: "Wrong type", code: 0, userInfo: ["object": data])
     }
     
-    func parse<Result, Container>(container: AnyObject, keyPath: String?, parseFunction: (Container) throws -> (Result)) throws -> Result {
+    func parse<Result, Container>(container: AnyObject, keyPath: String?, parseFunction: (Container) throws -> Result) throws -> Result {
         let object = try parseFoundationObject(container, keyPath: keyPath) as AnyObject
         if let primitive = object as? Result {
             return primitive

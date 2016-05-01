@@ -28,15 +28,24 @@ public struct JSONParser: JSONParsing{
     
     //MARK: - private
     
+    /**
+     Wrapps JSONSerialization into a generic function
+     
+     - parameter data: NSData which contains JSON
+     
+     - throws: throws when parsing fails, or parsed type if the wrong Container type
+     
+     - returns: the parse JSON as Container type
+     */
     internal func parseFoundationObject<Container>(data: NSData) throws -> Container {
-        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? Container else {
+        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? Container else {
              throw NSError(domain: "Wrong type", code: 0, userInfo: nil)
         }
         
         return serializedObject
     }
     
-    internal func parse<TargetElement, Container, Context>(data: NSData, JSONKeyPath: String?, context: Context?, parseFunction: (Container, String?, Context?) throws -> (TargetElement)) throws -> TargetElement {
+    internal func parse<TargetElement, Container, Context>(data: NSData, JSONKeyPath: String?, context: Context?, parseFunction: (Container, String?, Context?) throws -> TargetElement) throws -> TargetElement {
         let object = try parseFoundationObject(data) as Container
         
         return try parseFunction(object, JSONKeyPath, context)
