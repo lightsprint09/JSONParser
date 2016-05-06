@@ -16,7 +16,7 @@ class ThrowableDictionaryTest: XCTestCase {
     func testTranformToPrimitiv() {
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObject)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let obj: String = try throwableDict.valueFor("string")
             XCTAssertEqual(obj, "string")
         }catch {
@@ -27,7 +27,7 @@ class ThrowableDictionaryTest: XCTestCase {
     func testTranformToObject() {
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObject)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let obj: IDTestObject = try throwableDict.valueFor()
             XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
@@ -38,7 +38,7 @@ class ThrowableDictionaryTest: XCTestCase {
     func testTranformToObjectWithKeyPath() {
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObjectKeyPath)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let obj: IDTestObject = try throwableDict.valueFor("keypath")
             XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
@@ -49,7 +49,7 @@ class ThrowableDictionaryTest: XCTestCase {
     func testTranformToListWithKeyPath() {
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.listKeypath)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let obj: Array<IDTestObject> = try throwableDict.valueFor("innerList")
             XCTAssertEqual(obj.first, TestData.singleObjectResult)
         }catch {
@@ -61,7 +61,7 @@ class ThrowableDictionaryTest: XCTestCase {
         let data = "{ \"keyPath\": {\"keyPath\": \"string\"}}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(data)
-            let throwableDict: ThrowableDictionary = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict: ThrowableDictionary<NoContext> = ThrowableDictionary(dictionary: dictionary)
             let obj: String = try throwableDict.valueFor("keyPath.keyPath")
             XCTAssertEqual(obj, "string")
         }catch {
@@ -72,10 +72,23 @@ class ThrowableDictionaryTest: XCTestCase {
     func testRawDictionaryData() {
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(TestData.singleObject)
-            let throwableDict: ThrowableDictionary = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict: ThrowableDictionary<NoContext> = ThrowableDictionary(dictionary: dictionary)
             XCTAssertEqual(dictionary["string"] as? String, throwableDict.dictionary["string"]  as? String)
         }catch {
             XCTFail()
+        }
+    }
+    
+    func testInvalidKeyPath() {
+        let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(jsonData)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
+            let t: Array<String> = try throwableDict.valueFor("innerList.kexpaty.t")
+            print(t)
+            XCTFail()
+        }catch {
+            
         }
     }
     
@@ -83,7 +96,7 @@ class ThrowableDictionaryTest: XCTestCase {
         let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(jsonData)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let objs: Array<String> = try throwableDict.valueFor("innerList")
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, "marco")
@@ -97,7 +110,7 @@ class ThrowableDictionaryTest: XCTestCase {
         let jsonData = "{\"innerList\": {\"marco\": \"polo\"}}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
             let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(jsonData)
-            let throwableDict = ThrowableDictionary(dictionary: dictionary)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
             let objs: Dictionary<String, String> = try throwableDict.valueFor("innerList")
             XCTAssertEqual(objs["marco"], "polo")
         }catch {

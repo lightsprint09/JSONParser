@@ -14,30 +14,41 @@ public struct JSONParser: JSONParsing{
     
     public init() {}
     
-    internal func parse<TargetElement, Container>(data: NSData, JSONKeyPath: String?, parseFunction: (Container, String?) throws -> (TargetElement)) throws -> TargetElement {
-        let object = try parseFoundationObject(data) as Container
-        return try parseFunction(object, JSONKeyPath)
+    public func parseObject<TargetElement: JSONParsable>(data: NSData, JSONKeyPath: String?, context: TargetElement.Context?) throws -> TargetElement {
+        return try parse(data, JSONKeyPath: JSONKeyPath, context: context, parseFunction: foundationParser.parse)
     }
     
-    public func parseObject<TargetElement: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
-        return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
+    public func parseObject<TargetElement: DictionaryLiteralConvertible where TargetElement.Value: JSONParsable>(data: NSData, JSONKeyPath: String?, context: TargetElement.Value.Context?) throws -> TargetElement {
+       return try parse(data, JSONKeyPath: JSONKeyPath, context: context, parseFunction: foundationParser.parse)
     }
     
-    public func parseObject<TargetElement: DictionaryLiteralConvertible where TargetElement.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
-       return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
-    }
-    
-    public func parseObject<TargetElement: _ArrayType where TargetElement.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> TargetElement {
-        return try parse(data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
+    public func parseObject<TargetElement: _ArrayType where TargetElement.Element: JSONParsable>(data: NSData, JSONKeyPath: String?, context: TargetElement.Element.Context?) throws -> TargetElement {
+        return try parse(data, JSONKeyPath: JSONKeyPath, context: context, parseFunction: foundationParser.parse)
     }
     
     //MARK: - private
     
+    /**
+     Wrapps JSONSerialization into a generic function
+     
+     - parameter data: NSData which contains JSON
+     
+     - throws: throws when parsing fails, or parsed type if the wrong Container type
+     
+     - returns: the parse JSON as Container type
+     */
     internal func parseFoundationObject<Container>(data: NSData) throws -> Container {
-        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? Container else {
-             throw NSError(domain: "Wrong type", code: 0, userInfo: ["data": data, "dataString": NSString(data: data, encoding: NSUTF8StringEncoding) ?? ""])
+        guard let serializedObject = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? Container else {
+             throw NSError(domain: "Wrong type", code: 0, userInfo: nil)
         }
+        
         return serializedObject
+    }
+    
+    internal func parse<TargetElement, Container, Context>(data: NSData, JSONKeyPath: String?, context: Context?, parseFunction: (Container, String?, Context?) throws -> TargetElement) throws -> TargetElement {
+        let object = try parseFoundationObject(data) as Container
+        
+        return try parseFunction(object, JSONKeyPath, context)
     }
     
     

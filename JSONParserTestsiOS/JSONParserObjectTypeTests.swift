@@ -49,10 +49,20 @@ class JSONParserObjectTypeTests: XCTestCase {
         }
     }
     
-    func testPrimitiveValue() {
+    func testDoublePrimitiveValue() {
         let jsonData = "{\"id\": 3}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
             let double: Double = try parser.parseObject(jsonData, JSONKeyPath: "id")
+            XCTAssertEqual(double, 3)
+        }catch {
+            XCTFail()
+        }
+    }
+    
+    func testFloatPrimitiveValue() {
+        let jsonData = "{\"id\": 3}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let double: Float = try parser.parseObject(jsonData, JSONKeyPath: "id")
             XCTAssertEqual(double, 3)
         }catch {
             XCTFail()
