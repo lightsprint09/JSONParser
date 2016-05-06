@@ -48,7 +48,7 @@ struct FoundationParser {
     
     func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
         if let rootDictionary = data as? NSDictionary, let keyPath = keyPath where !keyPath.isEmpty {
-            if let targetData = rootDictionary.valueForKeyPath(keyPath), let typedTargetData = targetData as? T{
+            if let targetData = getValueForKeyPathFromDictionary(rootDictionary, keyPath: keyPath), let typedTargetData = targetData as? T {
                 return typedTargetData
             }else {
                 throw NSError(domain: "Wrong key: \(keyPath)", code: 0, userInfo: ["object": data])
@@ -59,6 +59,25 @@ struct FoundationParser {
             return targetData
         }
         throw NSError(domain: "Wrong type", code: 0, userInfo: ["object": data])
+    }
+    
+    func getValueForKeyPathFromDictionary(dictionary: NSDictionary, keyPath: String) -> AnyObject? {
+        let paths = keyPath.componentsSeparatedByString(".")
+        var dict: NSDictionary? = dictionary
+        for(i, path) in paths.enumerate() {
+            guard let value = dict?[path] else {
+                return nil
+            }
+            guard let dictValue = value as? NSDictionary else {
+                if i == paths.count - 1 {
+                     return value
+                }
+               continue
+            } 
+            dict = dictValue
+        }
+        
+        return dict
     }
     
     func parse<Result, Container>(container: AnyObject, keyPath: String?, parseFunction: (Container) throws -> (Result)) throws -> Result {
