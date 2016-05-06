@@ -79,6 +79,19 @@ class ThrowableDictionaryTest: XCTestCase {
         }
     }
     
+    func testInvalidKeyPath() {
+        let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
+        do {
+            let dictionary: Dictionary<String, AnyObject> = try parser.parseFoundationObject(jsonData)
+            let throwableDict = ThrowableDictionary<NoContext>(dictionary: dictionary)
+            let t: Array<String> = try throwableDict.valueFor("innerList.kexpaty.t")
+            print(t)
+            XCTFail()
+        }catch {
+            
+        }
+    }
+    
     func testTranformToListOfPrimitiveType() {
         let jsonData = "{\"innerList\": [\"marco\",\"polo\"]}".dataUsingEncoding(NSUTF8StringEncoding)!
         do {
