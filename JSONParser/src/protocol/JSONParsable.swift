@@ -8,7 +8,16 @@
 
 import Foundation
 
-public protocol JSONParsable {
+public protocol JSONParsable: DataBaseJSONParsable {
     associatedtype Context
     init(JSON: ThrowableDictionary<Context>) throws
+}
+
+public extension JSONParsable {
+    static func find(JSON: ThrowableDictionary<Context>) -> Self? {
+        return nil
+    }
+    func updateWith(JSON: ThrowableDictionary<Context>) -> Self {
+        return self
+    }
 }

@@ -32,6 +32,37 @@ struct IDTestInjectObject: JSONParsable{
     }
 }
 
+final class DataBaseObject: JSONParsable, DataBaseJSONParsable{
+    let id: String
+    var name: String
+    var notUpdateAble: Bool?
+    
+    init(id: String, name: String) {
+        self.id = id
+        self.name = name
+        notUpdateAble = true
+    }
+    
+    required init(JSON: ThrowableDictionary<NSMutableDictionary>) throws {
+        self.id = try JSON.valueFor("id")
+        self.name = try JSON.valueFor("name")
+        JSON.context?.setValue(self, forKey: id)
+    }
+    
+    static func find(JSON: ThrowableDictionary<NSMutableDictionary>) throws -> DataBaseObject? {
+        let id: String = try JSON.valueFor("id")
+        let object = JSON.context?[id] as? DataBaseObject
+        return object
+    }
+    
+    func updateWith(JSON: ThrowableDictionary<NSMutableDictionary>) throws -> DataBaseObject {
+        self.name = try JSON.valueFor("name")
+        return self
+    }
+    
+}
+
+
 func ==(lhs: IDTestObject, rhs: IDTestObject) -> Bool {
     return lhs.integer == rhs.integer && lhs.double == rhs.double && lhs.string == rhs.string && lhs.bool == rhs.bool
 }

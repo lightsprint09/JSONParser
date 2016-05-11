@@ -14,8 +14,8 @@ struct FoundationParser {
     
     func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?, context: Result.Context?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, AnyObject>) throws -> Result {
-            let trowableDict = ThrowableDictionary<Result.Context>(dictionary: typedContainer, context: context)
-            return try Result(JSON: trowableDict)
+            let throwableDict = ThrowableDictionary<Result.Context>(dictionary: typedContainer, context: context)
+            return try createObject(throwableDict)
         }
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
@@ -24,8 +24,8 @@ struct FoundationParser {
         func parseIt(typedContainer: Dictionary<String, Dictionary<String, AnyObject>>) throws -> Result {
             var result = Dictionary<String, Result.Value>()
             for (_, (key, dictionary)) in typedContainer.enumerate() {
-                let trowableDict = ThrowableDictionary<Result.Value.Context>(dictionary: dictionary, context: context)
-                let element = try Result.Value(JSON: trowableDict)
+                let throwableDict = ThrowableDictionary<Result.Value.Context>(dictionary: dictionary, context: context)
+                let element = try createObject(throwableDict) as Result.Value
                 result[key] = element
             }
             return result as! Result
@@ -37,8 +37,8 @@ struct FoundationParser {
     func parse<Result: _ArrayType where Result.Element: JSONParsable>(container: AnyObject, keyPath: String?, context: Result.Element.Context?) throws -> Result {
         func parseIt(typedContainer: Array<Dictionary<String, AnyObject>>) throws -> Result {
             let result: Array<Result.Element> = try typedContainer.map{ jsonObj in
-                let trowableDict = ThrowableDictionary<Result.Element.Context>(dictionary: jsonObj, context: context)
-                return try Result.Element(JSON: trowableDict)
+                let throwableDict = ThrowableDictionary<Result.Element.Context>(dictionary: jsonObj, context: context)
+                return try createObject(throwableDict)
             }
             return result as! Result
         }
@@ -90,5 +90,13 @@ struct FoundationParser {
         }
         
         throw NSError(domain: "Wrong Container", code: 0, userInfo: ["container": container])
+    }
+    
+    func createObject<Result: JSONParsable>(throwableDictionary: ThrowableDictionary<Result.Context>) throws -> Result {
+        if let foundObject = try Result.find(throwableDictionary) {
+            try foundObject.updateWith(throwableDictionary)
+            return foundObject
+        }
+        return try Result(JSON: throwableDictionary)
     }
 }
