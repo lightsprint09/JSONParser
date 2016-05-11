@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol JSONParsing: JSONParsingConvenience {
+public protocol JSONParsing {
     
     /**
      Parses NSData conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
@@ -51,42 +51,16 @@ public protocol JSONParsing: JSONParsingConvenience {
 }
 
 public extension JSONParsing {
-    
-    public func parseObject<T: JSONParsable>(data: NSData) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: nil)
+    public func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String? = nil, context: T.Context? = nil) throws -> T {
+        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: context)
     }
     
-    public func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
-        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
+    func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData, JSONKeyPath: String? = nil, context: T.Value.Context? = nil) throws -> T{
+        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: context)
     }
     
-    public func parseObject<T: JSONParsable>(data: NSData, context: T.Context?) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: context)
-    }
-    
-    
-    public func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: nil)
-    }
-    
-    public func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
-        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
-    }
-    
-    public func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData, context: T.Element.Context?) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: context)
-    }
-    
-    public func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: nil)
-    }
-    
-    public func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T {
-        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: nil)
-    }
-    
-    public func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData, context: T.Value.Context?) throws -> T {
-        return try parseObject(data, JSONKeyPath: nil, context: context)
+    func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData, JSONKeyPath: String? = nil, context: T.Element.Context? = nil) throws -> T {
+        return try parseObject(data, JSONKeyPath: JSONKeyPath, context: context)
     }
 }
 

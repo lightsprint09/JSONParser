@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol JSONFetching: JSONFetchingConvenience {
+public protocol JSONFetching {
     /**
      Loads JSON from the given request and parses it to an ArrayType with elements conforming to `JSONParsable`.
      
@@ -47,40 +47,16 @@ public protocol JSONFetching: JSONFetchingConvenience {
 }
 
 public extension JSONFetching {
-    public func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, context: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
+    public func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, JSONKeyPath: String? = nil, context: T.Element.Context? = nil, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+        loadObject(request, JSONKeyPath: JSONKeyPath, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
     
-    public func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: JSONKeyPath, context: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
+    public func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, JSONKeyPath: String? = nil, context: T.Value.Context? = nil, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+        loadObject(request, JSONKeyPath: JSONKeyPath, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
     
-    public func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, context: T.Element.Context?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: JSONKeyPath, context: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, context: T.Value.Context?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: JSONKeyPath, context: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
-    }
-    
-    public func loadObject<T: JSONParsable>(request: NSURLRequest, context: T.Context?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
-        loadObject(request, JSONKeyPath: nil, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
+    public func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String? = nil, context: T.Context? = nil, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+        loadObject(request, JSONKeyPath: JSONKeyPath, context: context, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
 }
 
