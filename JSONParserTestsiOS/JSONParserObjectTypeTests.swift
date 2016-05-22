@@ -25,9 +25,15 @@ class JSONParserObjectTypeTests: XCTestCase {
         do {
             let _: IDTestObject = try parser.parseObject(TestData.singleInvalidObject)
             XCTFail()
-        }catch let err as NSError{
-            XCTAssertNotNil(err)
-            XCTAssertEqual(err.domain, "Wrong key: double")
+        }catch let err as ParseError {
+            switch err {
+            case .MissingKey(let key):
+                XCTAssertEqual(key, "double")
+            default:
+                XCTFail()
+            }
+        }catch {
+             XCTFail()
         }
     }
     
