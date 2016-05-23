@@ -47,28 +47,28 @@ struct FoundationParser {
     }
     
     func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
-        if let rootDictionary = data as? NSDictionary, let keyPath = keyPath where !keyPath.isEmpty {
+        if let rootDictionary = data as? [String: AnyObject], let keyPath = keyPath where !keyPath.isEmpty {
             if let targetData = getValueForKeyPathFromDictionary(rootDictionary, keyPath: keyPath), let typedTargetData = targetData as? T {
                 return typedTargetData
             }else {
-                throw NSError(domain: "Wrong key: \(keyPath)", code: 0, userInfo: ["object": data])
+                throw ParseError.MissingKey(keyPath ?? "Root keypath")
             }
         }
         
         if let targetData = data as? T {
             return targetData
         }
-        throw NSError(domain: "Wrong type", code: 0, userInfo: ["object": data])
+        throw ParseError.InvalidValue(keyPath ?? "Root keypath", String(data.self))
     }
     
-    func getValueForKeyPathFromDictionary(dictionary: NSDictionary, keyPath: String) -> AnyObject? {
+    func getValueForKeyPathFromDictionary(dictionary: Dictionary<String, AnyObject>, keyPath: String) -> AnyObject? {
         let paths = keyPath.componentsSeparatedByString(".")
-        var dict: NSDictionary? = dictionary
+        var dict: Dictionary<String, AnyObject>? = dictionary
         for(i, path) in paths.enumerate() {
             guard let value = dict?[path] else {
                 return nil
             }
-            guard let dictValue = value as? NSDictionary else {
+            guard let dictValue = value as? Dictionary<String, AnyObject> else {
                 if i == paths.count - 1 {
                      return value
                 }
@@ -88,7 +88,6 @@ struct FoundationParser {
         if let object = object as? Container {
             return try parseFunction(object)
         }
-        
-        throw NSError(domain: "Wrong Container", code: 0, userInfo: ["container": container])
+        throw ParseError.InvalidValue(keyPath ?? "Root keypath", String(container.self))
     }
 }

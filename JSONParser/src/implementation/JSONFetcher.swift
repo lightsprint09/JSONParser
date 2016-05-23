@@ -10,7 +10,7 @@
 import Foundation
 
 public enum JSONFetcherErrorType: ErrorType {
-    case Parse(NSError?, String)
+    case Parse(ParseError)
     case Network(NSError?, String)
 }
 
@@ -57,11 +57,11 @@ public struct JSONFetcher: JSONFetching {
                 onSucces(obj)
             })
         }
-        catch let error as NSError{
+        catch let error as ParseError{
             dispatch_async(dispatch_get_main_queue(), {
-                onError(.Parse(error, NSString(data: data, encoding: NSUTF8StringEncoding) as? (String) ?? "Error"))
+                onError(.Parse(error))
             })
-        }
+        }catch {}
     }
     
     
