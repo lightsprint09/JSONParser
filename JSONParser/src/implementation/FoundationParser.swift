@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct FoundationParser {
+public struct FoundationParser {
     
     init() {}
     
-    func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
+    public func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, AnyObject>) throws -> Result {
             let trowableDict = ThrowableDictionary(dictionary: typedContainer)
             return try Result(JSON: trowableDict)
@@ -20,7 +20,7 @@ struct FoundationParser {
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    func parse<Result: DictionaryLiteralConvertible where Result.Value: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
+    public func parse<Result: DictionaryLiteralConvertible where Result.Value: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, Dictionary<String, AnyObject>>) throws -> Result {
             var result = Dictionary<String, Result.Value>()
             for (_, (key, dictionary)) in typedContainer.enumerate() {
@@ -34,7 +34,7 @@ struct FoundationParser {
        return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    func parse<T: _ArrayType where T.Element: JSONParsable>(container: AnyObject, keyPath: String?) throws -> T {
+    public func parse<T: _ArrayType where T.Element: JSONParsable>(container: AnyObject, keyPath: String?) throws -> T {
         func parseIt(typedContainer: Array<Dictionary<String, AnyObject>>) throws -> T {
             let result: Array<T.Element> = try typedContainer.map{ jsonObj in
                 let trowableDict = ThrowableDictionary(dictionary: jsonObj)
@@ -46,7 +46,7 @@ struct FoundationParser {
         return try parse(container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
+    public func parseFoundationObject<T>(data: AnyObject, keyPath: String?) throws -> T {
         if let rootDictionary = data as? [String: AnyObject], let keyPath = keyPath where !keyPath.isEmpty {
             if let targetData = getValueForKeyPathFromDictionary(rootDictionary, keyPath: keyPath), let typedTargetData = targetData as? T {
                 return typedTargetData
@@ -61,7 +61,7 @@ struct FoundationParser {
         throw ParseError.InvalidValue(keyPath ?? "Root keypath", String(data.self))
     }
     
-    func getValueForKeyPathFromDictionary(dictionary: Dictionary<String, AnyObject>, keyPath: String) -> AnyObject? {
+    public func getValueForKeyPathFromDictionary(dictionary: Dictionary<String, AnyObject>, keyPath: String) -> AnyObject? {
         let paths = keyPath.componentsSeparatedByString(".")
         var dict: Dictionary<String, AnyObject>? = dictionary
         for(i, path) in paths.enumerate() {
@@ -80,7 +80,7 @@ struct FoundationParser {
         return dict
     }
     
-    func parse<Result, Container>(container: AnyObject, keyPath: String?, parseFunction: (Container) throws -> (Result)) throws -> Result {
+    public func parse<Result, Container>(container: AnyObject, keyPath: String?, parseFunction: (Container) throws -> (Result)) throws -> Result {
         let object = try parseFoundationObject(container, keyPath: keyPath) as AnyObject
         if let primitive = object as? Result {
             return primitive
