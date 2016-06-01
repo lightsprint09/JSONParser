@@ -10,7 +10,7 @@ import Foundation
 
 public struct FoundationParser {
     
-    init() {}
+    public init() {}
     
     public func parse<Result: JSONParsable>(container: AnyObject, keyPath: String?) throws -> Result {
         func parseIt(typedContainer: Dictionary<String, AnyObject>) throws -> Result {
