@@ -19,7 +19,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
     
     /**
      Loads JSON from the given request and parses it to an ArrayType with elements conforming to `JSONParsable`.
@@ -30,7 +30,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
     
     /**
      Loads JSON from the given request and parses it to an dictionary with values conforming to `JSONParsable`.
@@ -42,7 +42,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: ExpressibleByDictionaryLiteral>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T.Value: JSONParsable
     
     /**
      Loads JSON from the given request and parses it to an dictionary with values conforming to `JSONParsable`.
@@ -53,7 +53,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: ExpressibleByDictionaryLiteral>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T.Value: JSONParsable
     
     /**
       Loads JSON from the given request and parses it to an objec conforming to `JSONParsable`.
@@ -65,7 +65,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: JSONParsable>(request: NSURLRequest, JSONKeyPath: String?, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: JSONParsable>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->())
     
     /**
      Loads JSON from the given request and parses it to an objec conforming to `JSONParsable`.
@@ -76,19 +76,19 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->())
+    func loadObject<T: JSONParsable>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->())
 }
 
 public extension JSONFetching{
-    public func loadObject<T: _ArrayType where T.Element: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+    public func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->())  where T._Element: JSONParsable {
         loadObject(request, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
     
-    public func loadObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+    public func loadObject<T: ExpressibleByDictionaryLiteral>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T.Value: JSONParsable {
         loadObject(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
     
-    public func loadObject<T: JSONParsable>(request: NSURLRequest, onSucessHandler: (T)->(), onErrorHandler: (JSONFetcherErrorType)->()) {
+    public func loadObject<T: JSONParsable>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) {
         loadObject(request, JSONKeyPath: nil, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
 }

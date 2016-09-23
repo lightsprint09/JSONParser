@@ -17,14 +17,15 @@ public struct ThrowableDictionary {
     }
     
     public func valueFor<T: JSONParsable>(keyPath: String? = nil) throws -> T {
-        return try parser.parse(dictionary, keyPath: keyPath)
+        
+        return try parser.parse(container: dictionary as AnyObject, keyPath: keyPath)
     }
     
-    public func valueFor<T: _ArrayType where T.Element: JSONParsable>(keyPath: String) throws -> T {
-        return try parser.parse(dictionary, keyPath: keyPath)
+    public func valueFor<T: RangeReplaceableCollection>(keyPath: String) throws -> T where T._Element: JSONParsable {
+        return try parser.parse(container: dictionary as AnyObject, keyPath: keyPath)
     }
     
-    public func valueFor<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(keyPath: String) throws -> T {
-        return try parser.parse(dictionary, keyPath: keyPath)
+    public func valueFor<T: ExpressibleByDictionaryLiteral>(keyPath: String) throws -> T where T.Value: JSONParsable {
+        return try parser.parse(container: dictionary as AnyObject, keyPath: keyPath)
     }
 }

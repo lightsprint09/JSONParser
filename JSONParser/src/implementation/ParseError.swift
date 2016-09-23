@@ -9,7 +9,7 @@
 
 import Foundation
 
-public enum ParseError: ErrorType, CustomStringConvertible {
+public enum ParseError: Error, CustomStringConvertible {
     public var description: String {
         let baseDescription = "[JSON Parser error] "
         
@@ -19,7 +19,7 @@ public enum ParseError: ErrorType, CustomStringConvertible {
         case .InvalidValue(let key, let valueDescription):
             return baseDescription + "Invalid value (\(valueDescription)) for key (\(key))"
         case .InvalidData:
-            return baseDescription + "Invalid NSData"
+            return baseDescription + "Invalid Data"
         }
     }
     
@@ -28,6 +28,6 @@ public enum ParseError: ErrorType, CustomStringConvertible {
     /// Thrown when a required key contained an invalid value in an unboxed dictionary. Contains the invalid
     /// key and a description of the invalid data.
     case InvalidValue(String, String)
-    /// Thrown when a piece of data (NSData) could not be unboxed because it was considered invalid
+    /// Thrown when a piece of data (Data) could not be unboxed because it was considered invalid
     case InvalidData
 }
