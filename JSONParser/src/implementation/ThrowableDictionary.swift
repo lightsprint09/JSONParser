@@ -21,7 +21,7 @@ public struct ThrowableDictionary {
         return try parser.parse(container: dictionary as AnyObject, keyPath: keyPath)
     }
     
-    public func valueFor<T: RangeReplaceableCollection>(keyPath: String) throws -> T where T._Element: JSONParsable {
+    public func valueFor<T: Collection>(keyPath: String) throws -> T where T._Element: JSONParsable {
         return try parser.parse(container: dictionary as AnyObject, keyPath: keyPath)
     }
     

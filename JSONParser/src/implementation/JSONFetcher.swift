@@ -23,7 +23,7 @@ public struct JSONFetcher: JSONFetching {
         self.urlSession = urlSession
     }
     
-    public func loadObject<T : RangeReplaceableCollection>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T) -> (), onErrorHandler: @escaping (JSONFetcherErrorType) -> ())  where T._Element: JSONParsable {
+    public func loadObject<T : Collection>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T) -> (), onErrorHandler: @escaping (JSONFetcherErrorType) -> ())  where T._Element: JSONParsable {
             loadJSONData(request: request, onSucessHandler: { data in
                 func parse() throws -> T {
                     return try self.jsonParser.parseObject(data: data, JSONKeyPath: JSONKeyPath)

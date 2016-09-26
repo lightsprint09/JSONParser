@@ -19,7 +19,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
+    func loadObject<T: Collection>(_ request: URLRequest, JSONKeyPath: String?, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
     
     /**
      Loads JSON from the given request and parses it to an ArrayType with elements conforming to `JSONParsable`.
@@ -30,7 +30,7 @@ public protocol JSONFetching {
      - parameter onErrorHandler:  the handler to execute when fetching or parsing fails. The handler takes the following arguments:
      `error` - An error object that indicates why the fetching or parsing failed
      */
-    func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
+    func loadObject<T: Collection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->()) where T._Element: JSONParsable
     
     /**
      Loads JSON from the given request and parses it to an dictionary with values conforming to `JSONParsable`.
@@ -80,7 +80,7 @@ public protocol JSONFetching {
 }
 
 public extension JSONFetching{
-    public func loadObject<T: RangeReplaceableCollection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->())  where T._Element: JSONParsable {
+    public func loadObject<T: Collection>(_ request: URLRequest, onSucessHandler: @escaping (T)->(), onErrorHandler: @escaping (JSONFetcherErrorType)->())  where T._Element: JSONParsable {
         loadObject(request, onSucessHandler: onSucessHandler, onErrorHandler: onErrorHandler)
     }
     

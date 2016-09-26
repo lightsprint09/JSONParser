@@ -27,7 +27,7 @@ public struct JSONParser: JSONParsing{
        return try parse(data: data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     
-    public func parseObject<TargetElement: RangeReplaceableCollection>(data: Data, JSONKeyPath: String?) throws -> TargetElement where TargetElement._Element: JSONParsable {
+    public func parseObject<TargetElement: Collection>(data: Data, JSONKeyPath: String?) throws -> TargetElement where TargetElement._Element: JSONParsable {
         return try parse(data: data, JSONKeyPath: JSONKeyPath, parseFunction: foundationParser.parse)
     }
     

@@ -20,7 +20,7 @@ public protocol JSONParsing {
      
      - returns: a array of objects parsed from JSON.
      */
-    func parseObject<T: RangeReplaceableCollection>(data: Data, JSONKeyPath: String?) throws -> T  where T._Element: JSONParsable
+    func parseObject<T: Collection>(data: Data, JSONKeyPath: String?) throws -> T  where T._Element: JSONParsable
     
     /**
      Parses Data conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
@@ -31,7 +31,7 @@ public protocol JSONParsing {
      
      - returns: a array of objects parsed from JSON.
      */
-    func parseObject<T: RangeReplaceableCollection>(data: Data) throws -> T where T._Element: JSONParsable
+    func parseObject<T: Collection>(data: Data) throws -> T where T._Element: JSONParsable
     
     /**
      Parses `Data` conatining a JSON object in an object `DictionaryLiteralConvertible` with values conforming to `JSONParsable`
@@ -87,7 +87,7 @@ public extension JSONParsing {
         return try parseObject(data: data, JSONKeyPath: nil)
     }
     
-    public func parseObject<T: RangeReplaceableCollection>(data: Data) throws -> T where T._Element: JSONParsable {
+    public func parseObject<T: Collection>(data: Data) throws -> T where T._Element: JSONParsable {
         return try parseObject(data: data, JSONKeyPath: nil)
     }
     

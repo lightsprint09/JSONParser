@@ -35,7 +35,7 @@ public struct FoundationParser {
        return try parse(container: container, keyPath: keyPath, parseFunction: parseIt)
     }
     
-    public func parse<T: RangeReplaceableCollection>(container: AnyObject, keyPath: String?) throws -> T where T._Element: JSONParsable {
+    public func parse<T: Collection>(container: AnyObject, keyPath: String?) throws -> T where T._Element: JSONParsable {
         func parseIt(typedContainer: Array<Dictionary<String, AnyObject>>) throws -> T {
             let result: Array<T._Element> = try typedContainer.map{ jsonObj in
                 let trowableDict = ThrowableDictionary(dictionary: jsonObj)
