@@ -14,7 +14,7 @@ class JSONParserObjectTypeTests: XCTestCase {
     
     func testObject() {
         do {
-            let obj: IDTestObject = try parser.parseObject(TestData.singleObject)
+            let obj: IDTestObject = try parser.parseObject(data: TestData.singleObject)
             XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
@@ -23,7 +23,7 @@ class JSONParserObjectTypeTests: XCTestCase {
     
     func testInvalidObject() {
         do {
-            let _: IDTestObject = try parser.parseObject(TestData.singleInvalidObject)
+            let _: IDTestObject = try parser.parseObject(data: TestData.singleInvalidObject)
             XCTFail()
         }catch let err as ParseError {
             switch err {
@@ -39,7 +39,7 @@ class JSONParserObjectTypeTests: XCTestCase {
     
     func testInvalidJSON() {
         do {
-            let _: IDTestObject = try parser.parseObject(TestData.singleInvalidJSON)
+            let _: IDTestObject = try parser.parseObject(data: TestData.singleInvalidJSON)
             XCTFail()
         }catch let err as NSError{
             XCTAssertNotNil(err)
@@ -48,7 +48,7 @@ class JSONParserObjectTypeTests: XCTestCase {
     
     func testKeyPathObject() {
         do {
-            let obj: IDTestObject = try parser.parseObject(TestData.singleObjectKeyPath, JSONKeyPath: "keypath")
+            let obj: IDTestObject = try parser.parseObject(data: TestData.singleObjectKeyPath, JSONKeyPath: "keypath")
             XCTAssertEqual(obj, TestData.singleObjectResult)
         }catch {
             XCTFail()
@@ -56,9 +56,9 @@ class JSONParserObjectTypeTests: XCTestCase {
     }
     
     func testPrimitiveValue() {
-        let jsonData = "{\"id\": 3}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "{\"id\": 3}".data(using: String.Encoding.utf8)!
         do {
-            let double: Double = try parser.parseObject(jsonData, JSONKeyPath: "id")
+            let double: Double = try parser.parseObject(data: jsonData, JSONKeyPath: "id")
             XCTAssertEqual(double, 3)
         }catch {
             XCTFail()
@@ -66,9 +66,9 @@ class JSONParserObjectTypeTests: XCTestCase {
     }
     
     func testPrimitiveKeypathValue() {
-        let jsonData = "{\"keypath\": {\"id\": 7}}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "{\"keypath\": {\"id\": 7}}".data(using: String.Encoding.utf8)!
         do {
-            let double: Double = try parser.parseObject(jsonData, JSONKeyPath: "keypath.id")
+            let double: Double = try parser.parseObject(data: jsonData, JSONKeyPath: "keypath.id")
             XCTAssertEqual(double, 7)
         }catch {
             XCTFail()
@@ -76,9 +76,9 @@ class JSONParserObjectTypeTests: XCTestCase {
     }
     
     func testDicationaryType() {
-        let jsonData = "{\"id\": 7}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "{\"id\": 7}".data(using: String.Encoding.utf8)!
         do {
-            let dictionary: Dictionary<String, Int> = try parser.parseObject(jsonData)
+            let dictionary: Dictionary<String, Int> = try parser.parseObject(data: jsonData)
              XCTAssertEqual(dictionary["id"], 7)
         }catch {
             XCTFail()
@@ -86,9 +86,9 @@ class JSONParserObjectTypeTests: XCTestCase {
     }
     
     func testDicationaryKeypath() {
-        let jsonData = "{\"keypath\": {\"id\": 7}}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "{\"keypath\": {\"id\": 7}}".data(using: String.Encoding.utf8)!
         do {
-            let dictionary: Dictionary<String, Int> = try parser.parseObject(jsonData, JSONKeyPath: "keypath")
+            let dictionary: Dictionary<String, Int> = try parser.parseObject(data: jsonData, JSONKeyPath: "keypath")
             XCTAssertEqual(dictionary["id"], 7)
         }catch {
             XCTFail()
@@ -96,9 +96,10 @@ class JSONParserObjectTypeTests: XCTestCase {
     }
     
     func testDictionaryTypeWithObject() {
-        let jsonData = "{\"object\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "{\"object\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".data(using: String.Encoding.utf8)!
         do {
-            let dictionary: Dictionary<String, IDTestObject> = try parser.parseObject(jsonData)
+            
+            let dictionary: Dictionary<String, IDTestObject> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(dictionary["object"], TestData.singleObjectResult)
         }catch {
             XCTFail()

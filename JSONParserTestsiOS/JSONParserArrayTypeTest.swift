@@ -22,7 +22,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     func testListKeypath() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseObject(TestData.listKeypath, JSONKeyPath: "innerList")
+            let objects: Array<IDTestObject> = try parser.parseObject(data: TestData.listKeypath, JSONKeyPath: "innerList")
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -33,7 +33,7 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     func testList() {
         do {
-            let objects: Array<IDTestObject> = try parser.parseObject(TestData.list, JSONKeyPath: nil)
+            let objects: Array<IDTestObject> = try parser.parseObject(data: TestData.list, JSONKeyPath: nil)
             XCTAssertEqual(objects.count, 1)
             let obj = objects.first!
             XCTAssertEqual(obj, TestData.singleObjectResult)
@@ -44,9 +44,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     // ["marco", "polo"]
     func testListOfString() {
-        let jsonData = "[\"marco\",\"polo\"]".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[\"marco\",\"polo\"]".data(using: String.Encoding.utf8)!
         do {
-            let objs: Array<String> = try parser.parseObject(jsonData)
+            let objs: Array<String> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, "marco")
             XCTAssertEqual(objs.last, "polo")
@@ -57,9 +57,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     
     // [1, 2]
     func testListOfDouble() {
-        let jsonData = "[1.01, 2.02]".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[1.01, 2.02]".data(using: String.Encoding.utf8)!
         do {
-            let objs: Array<Double> = try parser.parseObject(jsonData)
+            let objs: Array<Double> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, 1.01)
             XCTAssertEqual(objs.last, 2.02)
@@ -69,9 +69,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     }
     
     func testListOfInteger() {
-        let jsonData = "[1, 2]".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[1, 2]".data(using: String.Encoding.utf8)!
         do {
-            let objs: Array<Double> = try parser.parseObject(jsonData)
+            let objs: Array<Double> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, 1)
             XCTAssertEqual(objs.last, 2)
@@ -81,9 +81,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     }
     
     func testListOfBool() {
-        let jsonData = "[true, false]".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[true, false]".data(using: String.Encoding.utf8)!
         do {
-            let objs: Array<Bool> = try parser.parseObject(jsonData)
+            let objs: Array<Bool> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(objs.count, 2)
             XCTAssertEqual(objs.first, true)
             XCTAssertEqual(objs.last, false)
@@ -93,9 +93,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     }
     
     func testEmptyList() {
-        let jsonData = "[]".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[]".data(using: String.Encoding.utf8)!
         do {
-            let objs: Array<Bool> = try parser.parseObject(jsonData)
+            let objs: Array<Bool> = try parser.parseObject(data: jsonData)
             XCTAssertEqual(objs.count, 0)
         }catch {
             XCTFail()
@@ -103,9 +103,9 @@ class JSONParserArrayTypeTest: XCTestCase {
     }
     
     func testInvalidData() {
-        let jsonData = "[}".dataUsingEncoding(NSUTF8StringEncoding)!
+        let jsonData = "[}".data(using: String.Encoding.utf8)!
         do {
-            let _: Array<Bool> = try parser.parseObject(jsonData)
+            let _: Array<Bool> = try parser.parseObject(data: jsonData)
             XCTFail()
         }catch let error as NSError{
             XCTAssertNotNil(error)
