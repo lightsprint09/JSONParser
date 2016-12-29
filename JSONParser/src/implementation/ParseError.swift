@@ -9,25 +9,25 @@
 
 import Foundation
 
-public enum ParseError: ErrorType, CustomStringConvertible {
+public enum ParseError: Error, CustomStringConvertible {
     public var description: String {
         let baseDescription = "[JSON Parser error] "
         
         switch self {
-        case .MissingKey(let key):
+        case .missingKey(let key):
             return baseDescription + "Missing key (\(key))"
-        case .InvalidValue(let key, let valueDescription):
+        case .invalidValue(let key, let valueDescription):
             return baseDescription + "Invalid value (\(valueDescription)) for key (\(key))"
-        case .InvalidData:
-            return baseDescription + "Invalid NSData"
+        case .invalidData:
+            return baseDescription + "Invalid Data"
         }
     }
     
     /// Thrown when a required key was missing in an unboxed dictionary. Contains the missing key.
-    case MissingKey(String)
+    case missingKey(String)
     /// Thrown when a required key contained an invalid value in an unboxed dictionary. Contains the invalid
     /// key and a description of the invalid data.
-    case InvalidValue(String, String)
-    /// Thrown when a piece of data (NSData) could not be unboxed because it was considered invalid
-    case InvalidData
+    case invalidValue(String, String)
+    /// Thrown when a piece of data (Data) could not be unboxed because it was considered invalid
+    case invalidData
 }

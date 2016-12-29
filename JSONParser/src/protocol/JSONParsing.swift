@@ -11,7 +11,7 @@ import Foundation
 public protocol JSONParsing {
     
     /**
-     Parses NSData conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
+     Parses Data conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
      
      - parameter data: data wich contains JSON.
      - parameter JSONKeyPath: search path into JSON object for extracting result. Result must be an Arrayliteral.
@@ -20,10 +20,10 @@ public protocol JSONParsing {
      
      - returns: a array of objects parsed from JSON.
      */
-    func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T
+    func parseObject<T: Collection>(_ data: Data, JSONKeyPath: String?) throws -> T  where T._Element: JSONParsable
     
     /**
-     Parses NSData conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
+     Parses Data conatining a JSON object in an object ArrayType with elements conforming to `JSONParsable`.
      
      - parameter data: data wich contains JSON.
      
@@ -31,10 +31,10 @@ public protocol JSONParsing {
      
      - returns: a array of objects parsed from JSON.
      */
-    func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData) throws -> T
+    func parseObject<T: Collection>(_ data: Data) throws -> T where T._Element: JSONParsable
     
     /**
-     Parses `NSData` conatining a JSON object in an object `DictionaryLiteralConvertible` with values conforming to `JSONParsable`
+     Parses `Data` conatining a JSON object in an object `DictionaryLiteralConvertible` with values conforming to `JSONParsable`
      
      - parameter data: data wich contains JSON.
      - parameter JSONKeyPath: search path into JSON object for extracting result. Result must be an Arrayliteral.
@@ -43,10 +43,10 @@ public protocol JSONParsing {
      
      - returns: a dictionary of objects parsed from JSON.
      */
-    func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T
+    func parseObject<T: ExpressibleByDictionaryLiteral>(_ data: Data, JSONKeyPath: String?) throws -> T where T.Value: JSONParsable
     
     /**
-     Parses `NSData` conatining a JSON object in an object `DictionaryLiteralConvertible` with values conforming to `JSONParsable`.
+     Parses `Data` conatining a JSON object in an object `DictionaryLiteralConvertible` with values conforming to `JSONParsable`.
      
      - parameter data: data wich contains JSON.
      
@@ -54,10 +54,10 @@ public protocol JSONParsing {
      
      - returns: a dictionary of objects parsed from JSON.
      */
-    func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData) throws -> T
+    func parseObject<T: ExpressibleByDictionaryLiteral>(_ data: Data) throws -> T where T.Value: JSONParsable
     
     /**
-     Parses `NSData` conatining a JSON object in an object conforming `JSONParsable`.
+     Parses `Data` conatining a JSON object in an object conforming `JSONParsable`.
      
      - parameter data:        data wich contains JSON object.
      - parameter JSONKeyPath: search path into JSON object for extracting result. Result must be an object.
@@ -66,10 +66,10 @@ public protocol JSONParsing {
      
      - returns: a object parsed from JSON.
      */
-    func parseObject<T: JSONParsable>(data: NSData, JSONKeyPath: String?) throws -> T
+    func parseObject<T: JSONParsable>(_ data: Data, JSONKeyPath: String?) throws -> T
     
     /**
-     Parses `NSData` conatining a JSON object in an object conforming `JSONParsable`.
+     Parses `Data` conatining a JSON object in an object conforming `JSONParsable`.
      
      - parameter data: data wich contains JSON object.
      
@@ -77,21 +77,21 @@ public protocol JSONParsing {
      
      - returns: a object parsed from JSON.
      */
-    func parseObject<T: JSONParsable>(data: NSData) throws -> T
+    func parseObject<T: JSONParsable>(_ data: Data) throws -> T
     
 }
 
 public extension JSONParsing {
     
-    public func parseObject<T: JSONParsable>(data: NSData) throws -> T {
+    public func parseObject<T: JSONParsable>(_ data: Data) throws -> T {
         return try parseObject(data, JSONKeyPath: nil)
     }
     
-    public func parseObject<T: _ArrayType where T.Element: JSONParsable>(data: NSData) throws -> T {
+    public func parseObject<T: Collection>(_ data: Data) throws -> T where T._Element: JSONParsable {
         return try parseObject(data, JSONKeyPath: nil)
     }
     
-    public func parseObject<T: DictionaryLiteralConvertible where T.Value: JSONParsable>(data: NSData) throws -> T {
+    public func parseObject<T: ExpressibleByDictionaryLiteral>(_ data: Data) throws -> T where T.Value: JSONParsable {
         return try parseObject(data, JSONKeyPath: nil)
     }
 }

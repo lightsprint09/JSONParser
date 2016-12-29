@@ -17,10 +17,10 @@ struct IDTestObject:  JSONParsable, Equatable{
     let bool: Bool
     
     init(JSON: ThrowableDictionary) throws {
-        self.integer = try JSON.valueFor("integer")
-        self.double = try JSON.valueFor("double")
-        self.string = try JSON.valueFor("string")
-        self.bool = try JSON.valueFor("bool")
+        self.integer = try JSON.valueFor(keyPath: "integer")
+        self.double = try JSON.valueFor(keyPath: "double")
+        self.string = try JSON.valueFor(keyPath: "string")
+        self.bool = try JSON.valueFor(keyPath: "bool")
     }
 }
 
@@ -29,12 +29,12 @@ func ==(lhs: IDTestObject, rhs: IDTestObject) -> Bool {
 }
 
 struct TestData {
-    static let singleObject = "{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
-     static let singleInvalidObject = "{\"integer\": 3, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
-    static let singleInvalidJSON = "\"integer\": 3, \"string\": \"string\", \"bool\": true}".dataUsingEncoding(NSUTF8StringEncoding)!
-    static let singleObjectKeyPath = "{\"keypath\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".dataUsingEncoding(NSUTF8StringEncoding)!
-    static let listKeypath = "{\"innerList\": [{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]}".dataUsingEncoding(NSUTF8StringEncoding)!
-    static let list = "[{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]".dataUsingEncoding(NSUTF8StringEncoding)!
+    static let singleObject = "{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}".data(using: String.Encoding.utf8)!
+     static let singleInvalidObject = "{\"integer\": 3, \"string\": \"string\", \"bool\": true}".data(using: String.Encoding.utf8)!
+    static let singleInvalidJSON = "\"integer\": 3, \"string\": \"string\", \"bool\": true}".data(using: String.Encoding.utf8)!
+    static let singleObjectKeyPath = "{\"keypath\": {\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}}".data(using: String.Encoding.utf8)!
+    static let listKeypath = "{\"innerList\": [{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]}".data(using: String.Encoding.utf8)!
+    static let list = "[{\"integer\": 3, \"double\": 0.432, \"string\": \"string\", \"bool\": true}]".data(using: String.Encoding.utf8)!
     
     static let singleObjectResult = try! IDTestObject(JSON: ThrowableDictionary(dictionary: ["integer": 3, "double": 0.432, "string": "string", "bool": true]))
 }

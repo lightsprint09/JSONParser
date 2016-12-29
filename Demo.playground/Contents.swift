@@ -3,7 +3,7 @@
 import UIKit
 import JSONParser
 
-let trainJSONData = "{\"type\": \"ICE\", \"number\": 102, \"destination\": \"Berlin Hbf\"}".dataUsingEncoding(NSUTF8StringEncoding)!
+let trainJSONData = "{\"type\": \"ICE\", \"number\": 102, \"destination\": \"Berlin Hbf\"}".data(using: String.Encoding.utf8)!
 
 struct Train {
     let type: String
@@ -14,20 +14,20 @@ struct Train {
 extension Train: JSONParsable {
     init(JSON: ThrowableDictionary) throws {
         //Handle missing data
-        self.type = try JSON.valueFor("type")
-        self.number = try JSON.valueFor("number")
-        self.destination = try JSON.valueFor("destination")
+        self.type = try JSON.valueFor(keyPath: "type")
+        self.number = try JSON.valueFor(keyPath: "number")
+        self.destination = try JSON.valueFor(keyPath: "destination")
     }
 }
 
 let parser: JSONParsing = JSONParser()
 
-let iceTrain: Train = try! parser.parseObject(trainJSONData)
+let iceTrain: Train = try! parser.parseObject(data: trainJSONData)
 
 
 //Complex Example
 
-let trainWithLocationJSONData = "{\"type\": \"ICE\", \"number\": 102, \"destination\": \"Berlin Hbf\", \"location\": {\"longitude\": 9.90280151, \"latitude\": 51.58730407}}".dataUsingEncoding(NSUTF8StringEncoding)!
+let trainWithLocationJSONData = "{\"type\": \"ICE\", \"number\": 102, \"destination\": \"Berlin Hbf\", \"location\": {\"longitude\": 9.90280151, \"latitude\": 51.58730407}}".data(using: String.Encoding.utf8)!
 
 struct Location {
     let longitude: Double
@@ -36,8 +36,8 @@ struct Location {
 
 extension Location: JSONParsable {
     init(JSON: ThrowableDictionary) throws {
-        self.latitude = try JSON.valueFor("latitude")
-        self.longitude = try JSON.valueFor("latitude")
+        self.latitude = try JSON.valueFor(keyPath: "latitude")
+        self.longitude = try JSON.valueFor(keyPath: "latitude")
     }
 }
 
@@ -50,12 +50,12 @@ struct TrainWithLocation {
 
 extension TrainWithLocation: JSONParsable {
     init(JSON: ThrowableDictionary) throws {
-        self.type = try JSON.valueFor("type")
-        self.number = try JSON.valueFor("number")
-        self.destination = try JSON.valueFor("destination")
-        self.location = try JSON.valueFor("location")
+        self.type = try JSON.valueFor(keyPath: "type")
+        self.number = try JSON.valueFor(keyPath: "number")
+        self.destination = try JSON.valueFor(keyPath: "destination")
+        self.location = try JSON.valueFor(keyPath: "location")
     }
 }
 
-let iceTrainWithLocation: TrainWithLocation = try! parser.parseObject(trainWithLocationJSONData)
+let iceTrainWithLocation: TrainWithLocation = try! parser.parseObject(data: trainWithLocationJSONData)
 
